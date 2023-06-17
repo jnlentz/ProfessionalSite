@@ -1,0 +1,110 @@
+.tabBar {
+    display: flex; 
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+    gap: 5px;
+
+}
+
+.tabWindow {
+    height: 90%;
+    width: 100%;
+}
+
+.tab {
+    height: fit-content;
+    background-color: rgb(0, 166, 255);
+    color: white;
+    font-size: 12pt;
+    padding: 5px;
+    margin-top: auto;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.tab:hover {
+    background-color: rgb(202, 0, 202);
+}
+
+.activeTab {
+    background-color: black !important;
+    color: rgb(202, 0, 202);
+    border-top: 1px solid rgb(202, 0, 202);
+    border-left: 1px solid rgb(202, 0, 202);
+    border-right: 1px solid rgb(202, 0, 202);
+}
+
+
+
+.tabPane {
+    display: none;
+    color: white;
+    border-bottom: 1px solid rgb(202, 0, 202);
+    border-left: 1px solid rgb(202, 0, 202);
+    border-right: 1px solid rgb(202, 0, 202);
+    height: 100%;
+    flex-direction: column;
+}
+
+.activePane {
+    display: flex
+}
+
+
+
+.tabIntro {
+    font-size: 14pt;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.projectCard {
+    display: flex;
+    flex-flow: column;
+    width: fit-content;
+    margin: 10px;
+}
+
+.projectTitle {
+    text-align: center;
+    font-size: 18pt;
+    text-decoration: bold;
+    background-color: rgb(0, 166, 255);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.projectSummary {
+    padding: 10px;
+    border-bottom: 1px solid rgb(0, 166, 255);
+    border-left: 1px solid rgb(0, 166, 255);
+    border-right: 1px solid rgb(0, 166, 255);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 750px;
+}
+
+/* 
+.expansionPanel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.expansionHeader {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid rgb(202, 0, 202);
+}
+
+.expansionContent {
+    display: none;
+    width: 100%;
+}
+
+.expandedContent {
+    display: flex;
+} */
+

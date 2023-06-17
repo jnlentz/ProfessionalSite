@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
+        <script type="text/javascript" src="scripts/scripts.js"></script>  
+        <script type="text/javascript" src="scripts/work.js"></script>  
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <link rel="stylesheet" href="styles/work.css" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="siteLinks">
+                <span><a href="index.html">Home</a></span>
+                <span>Work</span>
+                <span><a href="utilities.html">Utilities</a> </span>
+                <span>About me</span>
+            </div>
+            <div class="externalLinks">
+
+            </div>
+        </div>
+        <div class="content">
+            <div class="tabBar">
+                <div id="professionalTab" class="tab activeTab" onclick="tabSwitch('professional')">Professional Experience</div>
+                <div id="personalTab" class="tab" onclick="tabSwitch('personal')">Personal Projects</div>
+            </div>
+            <div class="tabWindow">
+                <div id="professional" class="tabPane activePane">
+                    <div class="tabIntro">
+                        Below is a summary of the technical stacks I have professional experience with. Coming from a logistics company, all of
+                        the projects I have worked on support some aspect of the logistics process.  
+                    </div>
+                    <div class="projectCard">
+                        <div class="projectTitle">Angular Input Library</div>
+                        <div class="projectSummary">
+                            A library of input components for proprietary freight brokerage software. They were built with the company's 
+                            custom styling made available as an npm package on the company registry. It included a date/time picker, dropdown  
+                            menus, and a text input. All components were responsive, and the dropdown menus had search and multiselect options.
+                            
+                            <div class="languageBlock">
+                                TypeScript, HTML, CSS
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+                    <div class="projectCard">
+                        <div class="projectTitle">EDI Customer Integration</div>
+                        <div class="projectSummary">
+                            A tool to allow EDI engineers to input new customers to their database without having to write SQL code every time.
+                            It consisted of a table displaying all the existing customers, with options to modify an existing record or add a new one. 
+                            Either option opened another view that broke out the 42 columns of the table into sections that could easily be modified.
+                            The front end was Angular, the back end was an Azure function written in C#.  I built this whole project by myself, it was the first and only time I have written C#
+                            professionally.
+                            
+                            <div class="languageBlock">
+                                TypeScript, HTML, CSS
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+                    <div class="projectCard">
+                        <div class="projectTitle">Billing App Authentication</div>
+                        <div class="projectSummary">
+                            An existing billing tool for a warehouse.  I was tasked with adding MSAL authentication 
+                            so that certain reporting features could be made available to other departments without exposing sensitive information.
+                            The project was built in Python Flask with a front end using jQuery. My work on this project was almost entirely on the Python, 
+                            with only minor adjustments and additions being made to the UI.
+                            
+                            
+                            <div class="languageBlock">
+                                Python, JavaScript, HTML, CSS
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+                    <div class="projectCard">
+                        <div class="projectTitle">Warehouse Dashboards</div>
+                        <div class="projectSummary">
+                            This was an existing project that housed dashboards necessary for different stages of the warehouse production process. 
+                            I was tasked with creating several new dashboards, as well as helping troubleshoot the existing system as needed.
+                            The dashboards themselves all ran from a single Flask app.  Each dashboard recieved data from a dedicated SQLite database, 
+                            which was periodically refreshed by a seperate Python script running on a cronjob.  
+                            
+                            
+                            <div class="languageBlock">
+                                Python, SQL, JavaScript, HTML, CSS
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+                    <!-- <div class="expansionPanel">
+                        <div class="expansionHeader" onclick="panelSwitch('angularBlock')">
+                            Angular & NodeJS
+                        </div>
+                        <div id="angularBlock" class="expansionContent">
+                            
+                        </div>
+
+                    </div> -->
+                </div>
+                <div id="personal" class="tabPane">
+                    Here are my personal projects
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
