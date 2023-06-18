@@ -12,27 +12,39 @@
     width: 100%;
 }
 
+.icon {
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+}
+
 .tab {
     height: fit-content;
-    background-color: rgb(0, 166, 255);
+    background-color: black;
     color: white;
     font-size: 12pt;
     padding: 5px;
     margin-top: auto;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
 }
 
 .tab:hover {
-    background-color: rgb(202, 0, 202);
+    color: rgb(255, 0, 187);
+    border-top: 1px solid rgb(255, 0, 187);
+    border-left: 1px solid rgb(255, 0, 187);
+    border-right: 1px solid rgb(255, 0, 187);
 }
 
 .activeTab {
     background-color: black !important;
-    color: rgb(202, 0, 202);
-    border-top: 1px solid rgb(202, 0, 202);
-    border-left: 1px solid rgb(202, 0, 202);
-    border-right: 1px solid rgb(202, 0, 202);
+    color: rgb(0, 213, 255);
+    border-top: 1px solid rgb(0, 213, 255);
+    border-left: 1px solid rgb(0, 213, 255);
+    border-right: 1px solid rgb(0, 213, 255);
 }
 
 
@@ -40,9 +52,9 @@
 .tabPane {
     display: none;
     color: white;
-    border-bottom: 1px solid rgb(202, 0, 202);
-    border-left: 1px solid rgb(202, 0, 202);
-    border-right: 1px solid rgb(202, 0, 202);
+    border: 1px solid rgb(0, 213, 255);
+    /* border-left: 1px solid rgb(0, 213, 255);
+    border-right: 1px solid rgb(0, 213, 255); */
     height: 100%;
     flex-direction: column;
 }
@@ -59,6 +71,51 @@
     margin-bottom: 15px;
 }
 
+.tabContent {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+}
+.tools {
+    display: flex;
+    flex-flow: column;
+    width: 50%;
+}
+.toolCard {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin: 10px;
+}
+
+.toolHeader {
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 0, 187);
+    text-align: center;
+    font-size: 18pt;
+    text-decoration: bold;
+    background-color: rgb(52, 1, 56);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 1px solid rgb(255, 0, 187);
+    padding: 5px;
+}
+.toolContent {
+    padding: 10px;
+    border-bottom: 1px solid rgb(255, 0, 187);
+    border-left: 1px solid rgb(255, 0, 187);
+    border-right: 1px solid rgb(255, 0, 187);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+
+.projects {
+    display: flex;
+    flex-flow: column;
+    width: 50%;
+}
 .projectCard {
     display: flex;
     flex-flow: column;
@@ -67,21 +124,25 @@
 }
 
 .projectTitle {
+    display: flex;
+    flex-direction: row;
+    color: rgb(0, 213, 255);
     text-align: center;
     font-size: 18pt;
     text-decoration: bold;
-    background-color: rgb(0, 166, 255);
+    background-color: rgb(6, 1, 56);
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+    border: 1px solid rgb(0, 213, 255);
+    padding: 5px;
 }
 .projectSummary {
     padding: 10px;
-    border-bottom: 1px solid rgb(0, 166, 255);
-    border-left: 1px solid rgb(0, 166, 255);
-    border-right: 1px solid rgb(0, 166, 255);
+    border-bottom: 1px solid rgb(0, 213, 255);
+    border-left: 1px solid rgb(0, 213, 255);
+    border-right: 1px solid rgb(0, 213, 255);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    width: 750px;
 }
 
 /* 
@@ -96,7 +157,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    border: 1px solid rgb(202, 0, 202);
+    border: 1px solid rgb(255, 0, 187);
 }
 
 .expansionContent {

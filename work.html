@@ -41,71 +41,93 @@
                         Below is a summary of the technical stacks I have professional experience with. Coming from a logistics company, all of
                         the projects I have worked on support some aspect of the logistics process.  
                     </div>
-                    <div class="projectCard">
-                        <div class="projectTitle">Angular Input Library</div>
-                        <div class="projectSummary">
-                            A library of input components for proprietary freight brokerage software. They were built with the company's 
-                            custom styling made available as an npm package on the company registry. It included a date/time picker, dropdown  
-                            menus, and a text input. All components were responsive, and the dropdown menus had search and multiselect options.
-                            
-                            <div class="languageBlock">
-                                TypeScript, HTML, CSS
+                    <div class="tabContent">
+                        <div class="tools">
+                            <div class="toolCard">
+                                <div class="toolHeader">Libraries, Frameworks and Tools</div>
+                                <div class="toolContent">
+                                    SQL - I have written SQL querries to periodically retrieve data for live dashboards.  I have also spent numerous hours
+                                    troubleshooting querries for SSRS reports. The bulk of my experience is with MSSQL, but I have worked with MySQL and SQLLite as well.<br>
+                                    
+                                    Angular - I have worked on two enterprise Angular apps, both of them proprietary.  I have also created one smaller Angular project of my own that went into production, 
+                                    as well as many others for prototyping and proof of concept.  <br>
+
+                                    Node - I have run into ENOENT enough times to not be bothered by it.<br>
+                                    
+                                </div>
+        
                             </div>
-
-                            
                         </div>
+                        <div class="projects"> 
+                            <div class="projectCard">
+                                <div class="projectTitle">Angular Input Library <img class="icon" src="images/typescriptLogo.svg" alt=""><img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""></div>
+                                <div class="projectSummary">
+                                    A library of input components for proprietary freight brokerage software. They were built with the company's 
+                                    custom styling made available as an npm package on the company registry. It included a date/time picker, dropdown  
+                                    menus, and a text input. All components were responsive, and the dropdown menus had search and multiselect options.
+                                    
+                                    <div class="languageBlock">
+                                        TypeScript, HTML, CSS
+                                    </div>
+        
+                                    
+                                </div>
+        
+                            </div>
+                            <div class="projectCard">
+                                <div class="projectTitle">EDI Customer Integration  <img class="icon" src="images/typescriptLogo.svg" alt=""> <img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""> <img class="icon" src="images/cSharpLogo.png" alt=""></div>
+                                <div class="projectSummary">
+                                    A tool to allow EDI engineers to input new customers to their database without having to write SQL code every time.
+                                    It consisted of a table displaying all the existing customers, with options to modify an existing record or add a new one. 
+                                    Either option opened another view that broke out the 42 columns of the table into sections that could easily be modified.
+                                    The front end was Angular, the back end was an Azure function written in C#.  I built this whole project by myself, it was the first and only time I have written C#
+                                    professionally.
+                                    
+                                    <div class="languageBlock">
+                                        TypeScript, HTML, CSS
+                                    </div>
+        
+                                    
+                                </div>
+        
+                            </div>
+                            <div class="projectCard">
+                                <div class="projectTitle">Billing App Authentication  <img class="icon" src="images/pythonLogo.jpg" alt=""><img class="icon" src="images/JavaScript-logo.png" alt=""> <img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""></div>
+                                <div class="projectSummary">
+                                    An existing billing tool for a warehouse.  I was tasked with adding MSAL authentication 
+                                    so that certain reporting features could be made available to other departments without exposing sensitive information.
+                                    The project was built in Python Flask with a front end using jQuery. My work on this project was almost entirely on the Python, 
+                                    with only minor adjustments and additions being made to the UI.
+                                    
+                                    
+                                    <div class="languageBlock">
+                                        Python, JavaScript, HTML, CSS
+                                    </div>
+        
+                                    
+                                </div>
+        
+                            </div>
+                            <div class="projectCard">
+                                <div class="projectTitle">Warehouse Dashboards <img class="icon" src="images/pythonLogo.jpg" alt=""><img class="icon" src="images/JavaScript-logo.png" alt=""> <img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""></div>
+                                <div class="projectSummary">
+                                    This was an existing project that housed dashboards necessary for different stages of the warehouse production process. 
+                                    I was tasked with creating several new dashboards, as well as helping troubleshoot the existing system as needed.
+                                    The dashboards themselves all ran from a single Flask app.  Each dashboard recieved data from a dedicated SQLite database, 
+                                    which was periodically refreshed by a seperate Python script running on a cronjob.  
+                                    
+                                    
+                                    <div class="languageBlock">
+                                        Python, SQL, JavaScript, HTML, CSS
+                                    </div>
+        
+                                    
+                            </div>
+    
 
+                        </div>
                     </div>
-                    <div class="projectCard">
-                        <div class="projectTitle">EDI Customer Integration</div>
-                        <div class="projectSummary">
-                            A tool to allow EDI engineers to input new customers to their database without having to write SQL code every time.
-                            It consisted of a table displaying all the existing customers, with options to modify an existing record or add a new one. 
-                            Either option opened another view that broke out the 42 columns of the table into sections that could easily be modified.
-                            The front end was Angular, the back end was an Azure function written in C#.  I built this whole project by myself, it was the first and only time I have written C#
-                            professionally.
-                            
-                            <div class="languageBlock">
-                                TypeScript, HTML, CSS
-                            </div>
-
-                            
-                        </div>
-
-                    </div>
-                    <div class="projectCard">
-                        <div class="projectTitle">Billing App Authentication</div>
-                        <div class="projectSummary">
-                            An existing billing tool for a warehouse.  I was tasked with adding MSAL authentication 
-                            so that certain reporting features could be made available to other departments without exposing sensitive information.
-                            The project was built in Python Flask with a front end using jQuery. My work on this project was almost entirely on the Python, 
-                            with only minor adjustments and additions being made to the UI.
-                            
-                            
-                            <div class="languageBlock">
-                                Python, JavaScript, HTML, CSS
-                            </div>
-
-                            
-                        </div>
-
-                    </div>
-                    <div class="projectCard">
-                        <div class="projectTitle">Warehouse Dashboards</div>
-                        <div class="projectSummary">
-                            This was an existing project that housed dashboards necessary for different stages of the warehouse production process. 
-                            I was tasked with creating several new dashboards, as well as helping troubleshoot the existing system as needed.
-                            The dashboards themselves all ran from a single Flask app.  Each dashboard recieved data from a dedicated SQLite database, 
-                            which was periodically refreshed by a seperate Python script running on a cronjob.  
-                            
-                            
-                            <div class="languageBlock">
-                                Python, SQL, JavaScript, HTML, CSS
-                            </div>
-
-                            
-                        </div>
-
+                   
                     </div>
                     <!-- <div class="expansionPanel">
                         <div class="expansionHeader" onclick="panelSwitch('angularBlock')">

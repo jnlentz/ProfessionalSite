@@ -36,14 +36,14 @@
 #timestampInput {
     color: white;
     background-color: black;
-    border: 2px solid rgb(202, 0, 202);
+    border: 2px solid rgb(255, 0, 187);
     border-radius: 5px;
     height: 25px;
 
 }
 
 #convertButton {
-    background-color: rgb(0, 166, 255);
+    background-color: rgb(0, 213, 255);
     color: black;
     width: fit-content;
     padding: 5px;
@@ -55,7 +55,7 @@
     flex-direction: row;
     color: white;
     background-color: black;
-    border: 2px solid rgb(202, 0, 202);
+    border: 2px solid rgb(255, 0, 187);
     border-radius: 5px;
     margin-top: 3px;
 }
@@ -63,7 +63,7 @@
 .incBtns {
     height: fit-content;
     width: 20px;
-    color: rgb(0, 166, 255);
+    color: rgb(0, 213, 255);
 }
 
 
