@@ -2,21 +2,30 @@
 
 body {
     /* background-image: url("images/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg"); */
+    display: flex;
+    flex-direction: column;
     background-size: cover;
     background-color: black;
     font-family: 'Roboto', serif;
-    width: 99vw;
-    padding: 0px;
-    margin: 0px;
+    width: 98vw;
+    margin: 10px;
+    margin: auto;
 }
 a {
     text-decoration: none;
     color: inherit;
 }
+
+.navLink {
+    color: white;
+}
+
+.navLink:hover {
+    color: rgb(0, 213, 255);
+}
 .navbar {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     background-color: black;
     color: white;
     width: 100%;
@@ -29,35 +38,25 @@ a {
     gap: 5px;
 }
 
-.sidebar {
-    display: flex;
-    flex-direction: row;
-    width: 20%;
-    height: 100%;
-    background-color: black;
-    opacity: 70%;
-    margin: 0px 0px 20px 10px;
+.externalLinks {
+    margin-left: auto;
 }
-.main {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    height: 100%;
-    background-color: black;
-    opacity: 70%;
-    margin: 0px 10px 20px 0px;
-}
+
+
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 90%;
-    padding: 20px;
+    padding: 40px;
+    gap: 20px;
+    margin: auto;
 }
 
-.titleWrapper {
+.frameWrapper {
     width: fit-content;
+    margin-top: 200px;
 
 }
 

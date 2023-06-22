@@ -10,6 +10,7 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://kit.fontawesome.com/4f988d5b89.js" crossorigin="anonymous"></script>
         <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript" src="scripts/scripts.js"></script>  
         <script type="text/javascript" src="scripts/work.js"></script>  
@@ -21,16 +22,17 @@
     <body>
         <div class="navbar">
             <div class="siteLinks">
-                <span><a href="index.html">Home</a></span>
+                <span class="navLink"><a href="index.html">Home</a></span>
                 <span>Work</span>
-                <span><a href="utilities.html">Utilities</a> </span>
-                <span>About me</span>
+                <!-- <span><a href="utilities.html">Utilities</a> </span> -->
+                <span class="navLink"><a href="aboutMe.html">About me</a></span>
             </div>
             <div class="externalLinks">
-
+                <span class="navLink"><a href="https://github.com/jnlentz"><i class="fa-brands fa-github"></i></a></span>
+                <span class="navLink"><a href="https://www.linkedin.com/in/jessenlentz/"><i class="fa-brands fa-linkedin"></i></a></span>
             </div>
         </div>
-        <div class="content">
+        <div class="workContent">
             <div class="tabBar">
                 <div id="professionalTab" class="tab activeTab" onclick="tabSwitch('professional')">Professional Experience</div>
                 <div id="personalTab" class="tab" onclick="tabSwitch('personal')">Personal Projects</div>
@@ -38,90 +40,143 @@
             <div class="tabWindow">
                 <div id="professional" class="tabPane activePane">
                     <div class="tabIntro">
-                        Below is a summary of the technical stacks I have professional experience with. Coming from a logistics company, all of
-                        the projects I have worked on support some aspect of the logistics process.  
+                        I am a full stack web developer.  My experience as a professional comes from the logistics industry. Below is a summary of the tools I have worked with 
+                        and brief descriptions of the projects I used them on.  My aim is to give anyone who is interested a more detailed idea of my experience than I can fit
+                        on a resume.  
                     </div>
                     <div class="tabContent">
                         <div class="tools">
-                            <div class="toolCard">
-                                <div class="toolHeader">Libraries, Frameworks and Tools</div>
-                                <div class="toolContent">
-                                    SQL - I have written SQL querries to periodically retrieve data for live dashboards.  I have also spent numerous hours
-                                    troubleshooting querries for SSRS reports. The bulk of my experience is with MSSQL, but I have worked with MySQL and SQLLite as well.<br>
+                            <div class="toolHeader">Libraries, Frameworks and Tools</div>
+                            <div class="toolFrame">
+                                    <div class="toolTitle">
+                                        <span class="pname">
+                                            Database Technologies
+                                        </span>
+                                        <span class="iconSpan">
+                                            <i class="fa-solid fa-database"></i>
+                                        </span> 
+                                    </div>
+                                    <div class="toolContent">
+                                        My experience with databases is rooted in MSSQL. Most of the queries I've built were for dashboards tied to some production
+                                        process, where money would be lost if data was not current and accurate.  Database performance was a major concern in most of software 
+                                        projects I worked on. I have spent significant time working to reduce the runtime on a query below an acceptable threshold.
+                                        <br>
+                                        A significant portion of my SQL experience comes from troubleshooting SSRS reports.  The warehouse environment worked
+                                        in was highly dependent on them.  I often fixed queries for reports that were returning duplicate rows or missing information.
+                                        This gave me a front row seat to see how damaging a lack of data integrity can be to productivity.   
+                              
+                                        
+                                    </div>
+                                    <div class="toolTitle">
+                                        <span class="pname">
+                                            Front End
+                                        </span>
+                                        <span class="iconSpan">
+                                            <i class="fa-solid fa-laptop-code"></i>
+                                        </span> 
+                                    </div>
+                                    <div class="toolContent">
+                                        I built this website using vanilla JavaScript, HTML and CSS because I believe these are still the fundamental skills of front end development.
+                                        As a professional I built live dashboards using Python Flask for templating, with some use of jQuery on the front end. I have
+                                        also worked with two enterprise Angular apps, both of them front ends for proprietary logistics software.  I also built one standalone
+                                        tool that used Angular for the front end.
+                                    </div>
+                                    <div class="toolTitle">
+                                        <span class="pname">
+                                            Back End
+                                        </span>
+                                        <span class="iconSpan">
+                                            <i class="fa-solid fa-terminal"></i>
+                                        </span> 
+                                    </div>
+                                    <div class="toolContent">
+                                        The bulk of my back end experience is in Python running on Linux servers. I was part of a small team developing the code for an
+                                        entire warehouse.  We had multiple different Flask apps for different purposes, as well as a huge number of scripts running as 
+                                        cron jobs. 
+                                        <br>
+                                        Working in a different office with a different team, I built a tool that allowed EDI engineers to modify and update customer records.
+                                        The back end ran as a C# Azure Function.  This was my only C# contribution as my focus there was more on front end.
+                                    </div>
                                     
-                                    Angular - I have worked on two enterprise Angular apps, both of them proprietary.  I have also created one smaller Angular project of my own that went into production, 
-                                    as well as many others for prototyping and proof of concept.  <br>
-
-                                    Node - I have run into ENOENT enough times to not be bothered by it.<br>
-                                    
-                                </div>
-        
+                                
                             </div>
                         </div>
                         <div class="projects"> 
-                            <div class="projectCard">
-                                <div class="projectTitle">Angular Input Library <img class="icon" src="images/typescriptLogo.svg" alt=""><img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""></div>
-                                <div class="projectSummary">
+                            <div class="projectHeader"><span>Projects</span></div>
+                            <div class="projectFrame">
+                                <div class="projectTitle">
+                                    <span class="pname">
+                                        Angular Input Library
+                                    </span> 
+                                    <span class="iconSpan">
+                                        <img class="icon" src="images/typescriptLogo.svg" alt="">
+                                        <img class="icon" src="images/htmlLogo.svg" alt=""> 
+                                        <img class="icon" src="images/cssLogo.png" alt="">
+                                    </span> 
+                                </div>
+                                <div class="projectContent">
                                     A library of input components for proprietary freight brokerage software. They were built with the company's 
                                     custom styling made available as an npm package on the company registry. It included a date/time picker, dropdown  
                                     menus, and a text input. All components were responsive, and the dropdown menus had search and multiselect options.
-                                    
-                                    <div class="languageBlock">
-                                        TypeScript, HTML, CSS
-                                    </div>
-        
-                                    
                                 </div>
-        
-                            </div>
-                            <div class="projectCard">
-                                <div class="projectTitle">EDI Customer Integration  <img class="icon" src="images/typescriptLogo.svg" alt=""> <img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""> <img class="icon" src="images/cSharpLogo.png" alt=""></div>
-                                <div class="projectSummary">
+
+                                <div class="projectTitle">
+                                    <span class="pname">
+                                        EDI Customer Integration
+                                    </span>
+                                    <span class="iconSpan">
+                                        <img class="icon" src="images/typescriptLogo.svg" alt=""> 
+                                        <img class="icon" src="images/htmlLogo.svg" alt=""> 
+                                        <img class="icon" src="images/cssLogo.png" alt=""> 
+                                        <img class="icon" src="images/cSharpLogo.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="projectContent">
                                     A tool to allow EDI engineers to input new customers to their database without having to write SQL code every time.
                                     It consisted of a table displaying all the existing customers, with options to modify an existing record or add a new one. 
                                     Either option opened another view that broke out the 42 columns of the table into sections that could easily be modified.
                                     The front end was Angular, the back end was an Azure function written in C#.  I built this whole project by myself, it was the first and only time I have written C#
                                     professionally.
-                                    
-                                    <div class="languageBlock">
-                                        TypeScript, HTML, CSS
-                                    </div>
-        
-                                    
                                 </div>
-        
-                            </div>
-                            <div class="projectCard">
-                                <div class="projectTitle">Billing App Authentication  <img class="icon" src="images/pythonLogo.jpg" alt=""><img class="icon" src="images/JavaScript-logo.png" alt=""> <img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""></div>
-                                <div class="projectSummary">
+
+                                <div class="projectTitle">
+                                    <span class="pname">
+                                        Billing App Authentication
+                                    </span>                                  
+                                    <span class="iconSpan">
+                                        <img class="icon" src="images/pythonLogo.jpg" alt="">
+                                        <img class="icon" src="images/JavaScript-logo.png" alt="">
+                                        <img class="icon" src="images/htmlLogo.svg" alt=""> 
+                                        <img class="icon" src="images/cssLogo.png" alt="">
+                                    </span>
+                                    </div>
+                                <div class="projectContent">
                                     An existing billing tool for a warehouse.  I was tasked with adding MSAL authentication 
                                     so that certain reporting features could be made available to other departments without exposing sensitive information.
                                     The project was built in Python Flask with a front end using jQuery. My work on this project was almost entirely on the Python, 
                                     with only minor adjustments and additions being made to the UI.
-                                    
-                                    
-                                    <div class="languageBlock">
-                                        Python, JavaScript, HTML, CSS
-                                    </div>
-        
-                                    
                                 </div>
         
-                            </div>
-                            <div class="projectCard">
-                                <div class="projectTitle">Warehouse Dashboards <img class="icon" src="images/pythonLogo.jpg" alt=""><img class="icon" src="images/JavaScript-logo.png" alt=""> <img class="icon" src="images/htmlLogo.svg" alt=""> <img class="icon" src="images/cssLogo.png" alt=""></div>
-                                <div class="projectSummary">
-                                    This was an existing project that housed dashboards necessary for different stages of the warehouse production process. 
+                                <div class="projectTitle">
+                                    <span class="pname">
+                                        Warehouse Dashboards
+                                    </span>                                  
+                                    <span class="iconSpan">
+                                        <img class="icon" src="images/pythonLogo.jpg" alt="">
+                                        <img class="icon" src="images/JavaScript-logo.png" alt=""> 
+                                        <img class="icon" src="images/htmlLogo.svg" alt="">
+                                        <img class="icon" src="images/cssLogo.png" alt="">
+                                    </span>
+                                    </div>
+                                <div class="projectContent">
+                                    This was an existing project that housed all of the dashboards necessary for different stages of the warehouse production process. 
                                     I was tasked with creating several new dashboards, as well as helping troubleshoot the existing system as needed.
                                     The dashboards themselves all ran from a single Flask app.  Each dashboard recieved data from a dedicated SQLite database, 
                                     which was periodically refreshed by a seperate Python script running on a cronjob.  
-                                    
-                                    
-                                    <div class="languageBlock">
-                                        Python, SQL, JavaScript, HTML, CSS
-                                    </div>
+                                </div>
+
+
         
-                                    
                             </div>
     
 
@@ -139,8 +194,129 @@
 
                     </div> -->
                 </div>
-                <div id="personal" class="tabPane">
-                    Here are my personal projects
+                <div id="personal" class="tabPane"> <div class="tabIntro">
+                    Currently, the time I spend coding for myself is devoted to algorithmic trading.  The end goal is to develop a trading bot that will generate passive revenue. 
+                    It's a distant goal.  I decided to invest my time in this because it provides many different kinds of challenging problems that push me to further develop my 
+                    skills.  What I have learned so far has been well worth it.  
+                </div>
+                <div class="tabContent">
+                    <div class="tools">
+                        <div class="toolHeader">Libraries, Frameworks and Tools</div>
+                        <div class="toolFrame">
+                                <div class="toolTitle">
+                                    <span class="pname">
+                                        Database Technologies
+                                    </span>
+                                    <span class="iconSpan">
+                                        <i class="fa-solid fa-database"></i>
+                                    </span> 
+                                </div>
+                                <div class="toolContent">
+                                    I use SQLite databses for all of my personal projects.  It takes minutes to set up and does everything I need it to do.  
+
+                                     
+                          
+                                    
+                                </div>
+                                <div class="toolTitle">
+                                    <span class="pname">
+                                        Front End
+                                    </span>
+                                    <span class="iconSpan">
+                                        <i class="fa-solid fa-laptop-code"></i>
+                                    </span> 
+                                </div>
+                                <div class="toolContent">
+                                    This website is the biggest front end project I have done for myself.  I have used Dash in Python to create a barebones
+                                    UI for one of my old trading bots, but that was a long time ago.  That said, I freqently use MatPlotLib to create visualizations
+                                    for market research.  I have also used Seaborn and Plotly for the same thing.  
+                                </div>
+                                <div class="toolTitle">
+                                    <span class="pname">
+                                        Back End
+                                    </span>
+                                    <span class="iconSpan">
+                                        <i class="fa-solid fa-terminal"></i>
+                                    </span> 
+                                </div>
+                                <div class="toolContent">
+                                    Python Flask is my go to for any personal back end task.  
+
+                                </div>
+                                
+                            
+                        </div>
+                    </div>
+                    <div class="projects"> 
+                        <div class="projectHeader"><span>Projects</span></div>
+                        <div class="projectFrame">
+                            <div class="projectTitle">
+                                <span class="pname">
+                                    AutoTrader
+                                </span> 
+                                <span class="iconSpan">
+                                    <img class="icon" src="images/pythonLogo.jpg" alt="">
+                                </span> 
+                            </div>
+                            <div class="projectContent">
+                                This is the first functional trading bot I ever built.  It will buy and sell cryptocurrency based on programatically defined conditions. 
+                                It is a proof of concept - the conditions will not lead to profitable trades over time.  This project was about developing the back end support
+                                to be able to run and test live algorithms.  
+                                <br> <br> 
+                                <span class="viewRepoLink"><a href="https://github.com/jnlentz/AutoTrader-Demo">View repository <i class="fa-brands fa-github"></i></a></span>
+                            </div>
+
+                            <div class="projectTitle">
+                                <span class="pname">
+                                    Binance Data Retrieval
+                                </span>
+                                <span class="iconSpan">
+                                    <img class="icon" src="images/pythonLogo.jpg" alt="">
+                                </span>
+                            </div>
+                            <div class="projectContent">
+                                This is a tool that allows retrieval of large volumes of historical market data from the Binance crypto exchange<br> <br> 
+                                <span class="viewRepoLink"><a href="https://github.com/jnlentz/Binance-Data-Retrieval">View repository <i class="fa-brands fa-github"></i></a></span>
+                            </div>
+
+                            <div class="projectTitle">
+                                <span class="pname">
+                                    Appointment Scheduler
+                                </span>                                  
+                                <span class="iconSpan">
+                                    <img class="icon" src="images/javaLogo.png" alt="">
+                                </span>
+                                </div>
+                            <div class="projectContent">
+                                This was a desktop app written in Java that connected to a MySQL database.  It was the most in-depth coding project I did in school.<br> <br> 
+                                <span class="viewRepoLink"><a href="https://github.com/jnlentz/AppointmentScheduler">View repository <i class="fa-brands fa-github"></i></a></span>
+                            </div>
+    
+                            <div class="projectTitle">
+                                <span class="pname">
+                                    SimpleCalc
+                                </span>                                  
+                                <span class="iconSpan">
+                                    <img class="icon" src="images/javaLogo.png" alt="">
+                                    <img class="icon" src="images/androidLogo.png" alt="">
+                                </span>
+                                </div>
+                            <div class="projectContent">
+                                This was the first useable application I ever created. I haven't touched it in five years.  It's on here simply to show that I have been 
+                                working with code for at least that long. <br> <br> 
+                                <span class="viewRepoLink"><a href="https://github.com/jnlentz/SimpleCalc">View repository <i class="fa-brands fa-github"></i></a></span>
+                            </div>
+
+
+
+    
+                        </div>
+
+
+                    </div>
+                </div>
+               
+                </div>
                 </div>
 
             </div>
