@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Your Freelance Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <section class="about">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>I’m [Your Name], a freelancer with a background in mathematics and a focus on solving technical challenges through data science, automation, and web development. My work is about finding practical solutions that help clients achieve their goals, whether that’s building a website, analyzing data, or automating a process.</p>
+            <p>For example, I’ve worked on a project that involved creating a system to analyze cryptocurrency market trends. The goal was to process large datasets efficiently and provide insights for trading decisions. I built a pipeline to handle millions of data points, developed models to identify patterns, and set up automated workflows to streamline the process. It was a challenging project that required adapting to different tools and approaches, but the end result was a system that could work across various markets and deliver actionable results for the client.</p>
+            <p>I approach every project with flexibility, choosing the right tools for the job rather than sticking to a single technology. Whether it’s crafting a full-stack web application, digging into a dataset to answer a business question, or automating tasks like data pipelines or trading systems, I aim to create solutions that are efficient and tailored to the client’s needs. My focus is on getting the job done well, not on the spotlight.</p>
+            <p>Outside of work, I enjoy exploring new tech trends and solving math puzzles—it’s a great way to keep learning and stay sharp. If you have a challenge you’d like to tackle, I’d be happy to help find a solution that works for you.</p>
+        </div>
+    </section>
+    <script>
+        window.addEventListener('load', () => {
+            const aboutContent = document.querySelector('.about-content');
+            aboutContent.style.opacity = 0;
+            setTimeout(() => {
+                aboutContent.style.transition = 'opacity 1s ease-in';
+                aboutContent.style.opacity = 1;
+            }, 100);
+        });
+    </script>
+</body>
+</html>

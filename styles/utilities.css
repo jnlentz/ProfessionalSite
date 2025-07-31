@@ -1,3 +1,7 @@
+input {
+    min-width: 100px;
+}
+
 .frame {
     /* background: rgb(0,166,255);
     background: linear-gradient(163deg, rgba(0,166,255,1) 24%, rgba(202,0,150,1) 59%);  */
@@ -22,6 +26,16 @@
 }
 
 .dateInputCell {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dateCellLabel {
+    color: white;
+}
+
+.dateInputWrapper {
     display: flex;
     flex-direction: row;
     gap: 5px;

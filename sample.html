@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesse Lentz | Full-Stack Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Jesse Lentz</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="socials">
+            <a href="https://github.com/jnlentz"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/jessenlentz/"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Hey, I’m Jesse—A Developer Who Turns Ideas Into Tools</h1>
+        <p>I build websites, apps, and systems that solve real problems, from warehouse dashboards to trading bots.</p>
+        <a href="#work" class="cta-button">See My Work</a>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work">
+        <h2>My Work</h2>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="professional">Professional</button>
+            <button class="tab-btn" data-tab="personal">Personal</button>
+        </div>
+    
+        <!-- Professional Tab -->
+        <div class="tab-content" id="professional">
+            <div class="project">
+                <h3>EDI Customer Tool</h3>
+                <p>Built a solo project to help engineers manage customer data without writing code—saved hours of manual work.</p>
+                <span>Tech: Angular, C#, Azure</span>
+            </div>
+            <div class="project">
+                <h3>Warehouse Dashboards</h3>
+                <p>Created real-time dashboards for a warehouse, cutting downtime by keeping teams in sync with production data.</p>
+                <span>Tech: Python Flask, SQLite, JavaScript</span>
+            </div>
+            <!-- Add more as needed -->
+        </div>
+    
+        <!-- Personal Tab -->
+        <div class="tab-content" id="personal" style="display: none;">
+            <div class="project">
+                <h3>Trading Intelligence System</h3>
+                <p>Designed a market-agnostic trading platform that analyzes cryptocurrency data to predict profitable trades. It processes millions of data points in parallel, uses machine learning to spot opportunities, and backtests strategies with real-world fees—aiming for passive income.</p>
+                <span>Tech: Python, Pandas, XGBoost, RandomForest, SQLite</span>
+                <a href="#contact" class="cta-button small">Ask Me About It</a>
+            </div>
+            <div class="project">
+                <h3>AutoTrader Bot</h3>
+                <p>A cryptocurrency trading bot I created to test live strategies—my first step toward automated trading.</p>
+                <span>Tech: Python</span>
+                <a href="https://github.com/jnlentz/AutoTrader-Demo">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Jesse Lentz. Let’s build something great together.</p>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/4f988d5b89.js" crossorigin="anonymous"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>

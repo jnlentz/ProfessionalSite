@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Psychiatric-Industrial Complex: An Interactive Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: The SPA is designed with a thematic, non-linear flow to enhance user exploration, rather than mirroring the report's four-part structure. The goal is to guide the user through a narrative of discovery. It starts with 'The System's Core' (combining diagnostic vulnerability and corporate influence) to establish the foundational problem. It then moves to 'The Market for Suffering' to show the real-world consequences (disease mongering, patient dissatisfaction). 'A Tale of Two Systems' provides a comparative, interactive dashboard to highlight how policy choices matter. Finally, 'Pathways to Reform' presents critiques and solutions. This structure allows users to connect the dots between the system's flaws, its impact, and potential solutions in a more dynamic and engaging way than a linear reading. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: DSM Reliability (Table 1) -> Goal: Compare -> Viz: Bar Chart -> Interaction: Hover tooltips -> Justification: Visually dramatizes the low reliability scores, making the "crisis of validity" immediately apparent. -> Library: Chart.js.
+        - Report Info: DSM Panel Conflicts of Interest (Table 2) -> Goal: Inform/Relate -> Viz: Doughnut Chart -> Interaction: Clickable details -> Justification: Provides a high-impact visual of the percentage of influence, with the total dollar amount reinforcing the message. -> Library: Chart.js.
+        - Report Info: Disease Mongering Cases -> Goal: Inform/Compare -> Viz: Tabbed Content Blocks -> Interaction: Click to switch tabs -> Justification: Organizes dense case studies into a digestible, interactive format, preventing cognitive overload. -> Library/Method: HTML/CSS/JS.
+        - Report Info: Patient Satisfaction Data -> Goal: Compare -> Viz: Grouped Bar Chart -> Interaction: Hover tooltips -> Justification: Creates a stark visual contrast between satisfaction in mental vs. physical health, validating a key report hypothesis. -> Library: Chart.js.
+        - Report Info: International Systems (Table 3) -> Goal: Explore/Compare -> Viz: Interactive Dashboard (Dropdown + Bar Chart) -> Interaction: User selects metric to update chart -> Justification: Transforms a static table into the app's most interactive feature, empowering users to explore the data and discover how policy choices correlate with outcomes. -> Library/Method: Chart.js + JS event handling.
+        - Report Info: Alternative Models -> Goal: Inform/Organize -> Viz: HTML/CSS Info Cards -> Interaction: Hover effects -> Justification: Presents solutions in a visually appealing, hopeful, and easily scannable format. -> Library/Method: HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Lora', serif; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 400px; max-height: 450px;} }
+        .nav-link { transition: color 0.2s; }
+        .nav-link.active { color: #2dd4bf; border-bottom-color: #2dd4bf; }
+        .tab.active { background-color: #0f766e; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .cycle-box { transition: all 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200">
+        <nav class="container mx-auto px-4">
+            <ul class="flex items-center justify-center space-x-4 sm:space-x-8 h-16 text-sm sm:text-base font-medium text-gray-600">
+                <li><a href="#intro" class="nav-link py-5 border-b-2 border-transparent hover:text-teal-500">Introduction</a></li>
+                <li><a href="#core" class="nav-link py-5 border-b-2 border-transparent hover:text-teal-500">The System's Core</a></li>
+                <li><a href="#market" class="nav-link py-5 border-b-2 border-transparent hover:text-teal-500">The Market for Suffering</a></li>
+                <li><a href="#comparison" class="nav-link py-5 border-b-2 border-transparent hover:text-teal-500">A Tale of Two Systems</a></li>
+                <li><a href="#reform" class="nav-link py-5 border-b-2 border-transparent hover:text-teal-500">Pathways to Reform</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-teal-800 mb-4">The Psychiatric-Industrial Complex</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An interactive analysis of corporate influence, diagnostic uncertainty, and the patient experience. This application translates a comprehensive research report into an explorable narrative. It reveals how the mental health system's reliance on subjective diagnosis has created a vulnerability exploited by pharmaceutical and insurance interests, often at the expense of patient well-being.</p>
+            </div>
+        </section>
+
+        <section id="core" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">The System's Core</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">This section explores the system's foundational weaknesses: a diagnostic manual with questionable scientific validity and the pervasive financial influence of the industries that profit from it. We examine how this combination creates a self-reinforcing cycle where the lines between science, commerce, and care become blurred.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2 text-center">A Crisis of Reliability</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">The kappa score measures diagnostic agreement between clinicians (0 = chance, 1 = perfect). The rigorous "test-retest" trials for the DSM-5 revealed remarkably low reliability for common disorders, forcing the task force to lower its own standards for what was "acceptable."</p>
+                        <div class="chart-container" style="height: 300px; max-height: 350px;">
+                            <canvas id="kappaChart"></canvas>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2 text-center">The Architects of Diagnosis</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">The experts who write the DSM have extensive financial ties to the pharmaceutical industry. This chart shows the percentage of DSM-5-TR panel members who received industry payments, and the total amount disclosed.</p>
+                        <div class="chart-container" style="height: 300px; max-height: 350px;">
+                            <canvas id="conflictsChart"></canvas>
+                        </div>
+                        <div id="funder-info" class="text-center mt-4">
+                            <p class="text-xs text-gray-500">Key funders include: Janssen, Pfizer, Lundbeck, Otsuka, & more.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">The Cycle of Influence</h3>
+                    <div class="grid md:grid-cols-4 gap-4 text-center">
+                        <div id="cycle-1" class="cycle-box bg-teal-100 p-4 rounded-lg cursor-pointer border-2 border-transparent">
+                            <h4 class="font-bold">1. Subjective Diagnosis</h4>
+                            <p class="text-sm text-teal-800">No objective tests; reliance on checklists.</p>
+                        </div>
+                        <div id="cycle-2" class="cycle-box bg-amber-100 p-4 rounded-lg cursor-pointer border-2 border-transparent">
+                            <h4 class="font-bold">2. Corporate Influence</h4>
+                            <p class="text-sm text-amber-800">Industry funds panels, research & marketing.</p>
+                        </div>
+                        <div id="cycle-3" class="cycle-box bg-teal-100 p-4 rounded-lg cursor-pointer border-2 border-transparent">
+                            <h4 class="font-bold">3. Skewed "Science"</h4>
+                            <p class="text-sm text-teal-800">Biased trials & "education" promote drugs.</p>
+                        </div>
+                        <div id="cycle-4" class="cycle-box bg-amber-100 p-4 rounded-lg cursor-pointer border-2 border-transparent">
+                            <h4 class="font-bold">4. Pressured Practice</h4>
+                            <p class="text-sm text-amber-800">Doctors influenced by ads & billing codes.</p>
+                        </div>
+                    </div>
+                     <div id="cycle-explanation" class="mt-6 bg-white p-6 rounded-lg shadow-inner min-h-[100px]">
+                        <p class="text-gray-700">Click on a box above to learn more about each stage of the cycle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="market" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">The Market for Suffering</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">This section investigates the real-world consequences of a commercially influenced system. We explore "disease mongering"—marketing campaigns that turn normal life experiences into medical conditions—and examine the stark disconnect between the public's faith in the system and the lived reality of patients.</p>
+                </div>
+                
+                <h3 class="text-2xl font-semibold mb-4 text-center">Case Studies in Disease Mongering</h3>
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex border-b border-gray-300 mb-6">
+                        <button class="tab active flex-1 py-2 px-4 font-medium" data-tab="sad">Social Anxiety</button>
+                        <button class="tab flex-1 py-2 px-4 font-medium" data-tab="pmdd">PMDD</button>
+                        <button class="tab flex-1 py-2 px-4 font-medium" data-tab="adhd">Adult ADHD</button>
+                        <button class="tab flex-1 py-2 px-4 font-medium" data-tab="bipolar">Bipolar Spectrum</button>
+                    </div>
+                    <div id="sad" class="tab-content active">
+                        <h4 class="font-bold text-lg mb-2">The Medicalization of Shyness</h4>
+                        <p class="text-gray-700">GSK's $92M+ campaign, "Imagine Being Allergic to People," transformed normal shyness into Social Anxiety Disorder (SAD) to create a market for its antidepressant, Paxil. A product director admitted, "Every marketer’s dream is to find an unidentified market and to develop it. That’s what we were able to do with social anxiety disorder."</p>
+                    </div>
+                    <div id="pmdd" class="tab-content">
+                        <h4 class="font-bold text-lg mb-2">The Invention of PMDD</h4>
+                        <p class="text-gray-700">To extend the life of its blockbuster antidepressant Prozac, which was going off-patent, Eli Lilly repackaged the same drug in a pink capsule, renamed it "Sarafem," and marketed it for Premenstrual Dysphoric Disorder (PMDD)—a newly medicalized and branded condition based on common, severe premenstrual symptoms.</p>
+                    </div>
+                    <div id="adhd" class="tab-content">
+                        <h4 class="font-bold text-lg mb-2">The Expansion of Adult ADHD</h4>
+                        <p class="text-gray-700">After creating a robust market for children, the industry targeted the much larger adult market. Campaigns stretched the definition of ADHD to include common behaviors like impatience and disorganization. Prescriptions for adults aged 20-39 nearly tripled in five years, from 5.6M to almost 16M, creating a global market projected to exceed $18B by 2030.</p>
+                    </div>
+                    <div id="bipolar" class="tab-content">
+                        <h4 class="font-bold text-lg mb-2">The "Bipolar Spectrum"</h4>
+                        <p class="text-gray-700">The concept of bipolar disorder was expanded from classic mania to a vague "spectrum" including irritability and chronic depression. This coincided with the aggressive marketing of new, highly profitable atypical antipsychotics for a vastly expanded patient population, despite risks of major long-term side effects like metabolic syndrome.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center mt-16">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-center">Perception vs. Reality: Patient Satisfaction</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">While public trust in medicine remains generally high, surveys of actual patients reveal a deep dissatisfaction with mental healthcare compared to physical healthcare. The data suggests the system's reputation may be undeserved.</p>
+                        <div class="chart-container" style="height: 300px; max-height: 350px;">
+                            <canvas id="satisfactionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-center">Long-Term Outcomes: The Hidden Harms</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold">Antidepressants</h4>
+                                <p class="text-gray-700 text-sm">Long-term use is associated with significant side effects. A survey of 1,400+ users reported:</p>
+                                <ul class="text-sm list-disc list-inside mt-1">
+                                    <li><span class="font-semibold">73.5%</span> reported withdrawal effects</li>
+                                    <li><span class="font-semibold">71.8%</span> reported sexual problems</li>
+                                    <li><span class="font-semibold">64.5%</span> reported feeling "emotionally numb"</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Antipsychotics</h4>
+                                <p class="text-gray-700 text-sm">While they can prevent relapse, long-term use carries a heavy burden, including metabolic syndrome (weight gain, diabetes), cardiovascular issues, and motor side effects. Patients often feel their overall quality of life is compromised.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">A Tale of Two Systems</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">This interactive dashboard compares the mental health systems of four high-income nations. By exploring how different policy choices regarding advertising, drug pricing, and funding correlate with outcomes, it becomes clear that the intense commercial pressures in the U.S. are not inevitable, but a result of specific political and economic decisions.</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold mb-4 sm:mb-0">International System Comparator</h3>
+                        <select id="metric-selector" class="border border-gray-300 rounded-md p-2">
+                            <option value="dtca">Drug Ad Regulation</option>
+                            <option value="pricing">Drug Pricing</option>
+                            <option value="diagnosisRate">Reported Diagnosis Rate</option>
+                            <option value="suicideRate" selected>Suicide Rate</option>
+                            <option value="psychiatrists">Psychiatrists per 100k</option>
+                        </select>
+                    </div>
+                    <div id="comparison-text" class="text-center text-gray-600 text-sm mb-4 min-h-[40px]"></div>
+                    <div class="chart-container">
+                        <canvas id="countryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reform" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Pathways to Reform</h2>
+                     <p class="text-lg text-gray-600 max-w-3xl mx-auto">Confronting the system's failures requires looking beyond the dominant medical model. This section explores powerful critical perspectives and highlights proven, evidence-based alternative models of care. These frameworks prioritize the whole person, their social context, and their innate capacity for healing, offering a hopeful vision for a system aligned with genuine human needs.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">The Recovery Model</h4>
+                        <p>A paradigm shift from "cure" to supporting a person's journey toward a meaningful life, even with symptoms. It is person-driven, holistic, and emphasizes hope and peer support.</p>
+                    </div>
+                     <div class="bg-gray-100 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Trauma-Informed Care (TIC)</h4>
+                        <p>Reframes the question from "What's wrong with you?" to "What happened to you?" It recognizes that distress is often an adaptive response to trauma and seeks to create safe environments that avoid re-traumatization.</p>
+                    </div>
+                     <div class="bg-gray-100 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">The Hearing Voices Network (HVN)</h4>
+                        <p>A radical, peer-led movement that frames hearing voices not as pathology, but as a meaningful human experience that can be understood. It provides safe, non-judgmental peer support groups.</p>
+                    </div>
+                     <div class="bg-gray-100 p-6 rounded-lg col-span-1 md:col-span-2 lg:col-span-3">
+                        <h4 class="font-bold text-lg mb-2">Open Dialogue (Finland)</h4>
+                        <p>A resource-intensive approach for first-episode psychosis that involves the person's entire social network in open meetings, prioritizing dialogue over premature labeling. A 19-year follow-up showed vastly superior outcomes to standard care, with significantly lower disability (33% vs 61%) and antipsychotic use (36% vs 81%).</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Key Recommendations</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="p-4 bg-teal-50 rounded-lg"><strong>Ban Direct-to-Consumer Advertising:</strong> Align with the rest of the developed world to curb marketing-driven demand for medications.</li>
+                        <li class="p-4 bg-amber-50 rounded-lg"><strong>Implement Evidence-Based Price Negotiation:</strong> Delink drug profitability from marketing by tying prices to demonstrated clinical benefit.</li>
+                        <li class="p-4 bg-teal-50 rounded-lg"><strong>Eliminate Conflicts of Interest:</strong> Mandate that DSM and guideline authors be completely free of financial ties to industry.</li>
+                        <li class="p-4 bg-amber-50 rounded-lg"><strong>Fund Research into Alternatives:</strong> Increase funding for non-pharmacological models (like Open Dialogue) and for developing safe medication tapering protocols.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">This interactive report is based on a synthesis of publicly available research and critical analysis. All data is sourced from the referenced report. For educational purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const reportData = {
+                kappaScores: {
+                    labels: ['Major Depressive Disorder', 'Generalized Anxiety Disorder', 'Schizophrenia', 'Bipolar I Disorder', 'PTSD'],
+                    dsm3: [0.78, null, 0.81, 0.84, null],
+                    dsm5: [0.28, 0.20, 0.46, 0.54, 0.69]
+                },
+                conflicts: {
+                    percentWithTies: 60,
+                    totalPayments: 14.2 
+                },
+                satisfaction: {
+                    physical: 77.9,
+                    mental: 54.7
+                },
+                countryComparison: {
+                    labels: ['United States', 'United Kingdom', 'Canada', 'Germany'],
+                    dtca: { data: [1, 0, 0.5, 0], text: 'Regulation of Direct-to-Consumer Advertising (1 = Permitted, 0.5 = Permitted with loopholes, 0 = Prohibited). The US is an outlier.'},
+                    pricing: { data: [0, 1, 1, 1], text: 'Drug Price Negotiation (1 = Negotiated, 0 = Unregulated). The US is the only country that does not negotiate prices.' },
+                    diagnosisRate: { data: [23, 17, 27, 9], text: 'Reported Mental Health Diagnosis/Distress Rate (%). The US and Canada report high rates of distress.' },
+                    suicideRate: { data: [13.9, 7.3, 10.4, 9.2], text: 'Suicide Rate per 100,000 population. The US has the highest rate among these nations.' },
+                    psychiatrists: { data: [8.9, 10.6, 14.5, 27.5], text: 'Psychiatrists per 100,000 population. The US has the fewest, while Germany has the most.' }
+                },
+                cycleExplanations: {
+                    'cycle-1': 'The system is built on the Diagnostic and Statistical Manual (DSM), which defines disorders by symptom checklists, not objective biological evidence. This creates a "grey area" where the line between normal distress and pathology is blurry and subjective.',
+                    'cycle-2': 'Pharmaceutical and insurance companies exert immense influence. Drug companies fund the very experts who write the DSM, sponsor the majority of clinical trials, and spend billions on marketing. Insurers create billing structures that favor medication over therapy.',
+                    'cycle-3': 'The result is a biased evidence base. Industry-funded studies are nearly 5 times more likely to report positive results. "Continuing Medical Education," often funded by pharma, becomes a form of marketing, shaping how doctors understand and treat illness.',
+                    'cycle-4': 'Clinicians on the front lines are caught in this web. They face pressure from drug ads that drive patient requests and insurance rules that make time-intensive therapy difficult. The path of least resistance often becomes a quick diagnosis and a prescription.'
+                }
+            };
+
+            let countryChartInstance = null;
+            
+            const renderKappaChart = () => {
+                const ctx = document.getElementById('kappaChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: reportData.kappaScores.labels,
+                        datasets: [
+                            {
+                                label: 'DSM-III / IV Reliability',
+                                data: reportData.kappaScores.dsm3,
+                                backgroundColor: 'rgba(15, 118, 110, 0.6)',
+                                borderColor: 'rgba(15, 118, 110, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'DSM-5 Reliability (Lower is Worse)',
+                                data: reportData.kappaScores.dsm5,
+                                backgroundColor: 'rgba(245, 158, 11, 0.6)',
+                                borderColor: 'rgba(245, 158, 11, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: true, suggestedMax: 1, title: { display: true, text: 'Kappa Score (Agreement)' }}
+                        },
+                        plugins: {
+                           tooltip: {
+                                callbacks: {
+                                    title: (context) => context[0].label.replace(/ /g, '\n')
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            const renderConflictsChart = () => {
+                const ctx = document.getElementById('conflictsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Members with Industry Ties', 'Members without Ties'],
+                        datasets: [{
+                            data: [reportData.conflicts.percentWithTies, 100 - reportData.conflicts.percentWithTies],
+                            backgroundColor: ['rgba(245, 158, 11, 0.8)', 'rgba(15, 118, 110, 0.6)'],
+                            borderColor: ['#fff'],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        cutout: '70%',
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            title: { display: true, text: `Over $${reportData.conflicts.totalPayments} Million in Payments` }
+                        }
+                    }
+                });
+            };
+            
+            const renderSatisfactionChart = () => {
+                const ctx = document.getElementById('satisfactionChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Physical Health Care', 'Mental Health Care'],
+                        datasets: [{
+                            label: 'Patient Satisfaction Rate',
+                            data: [reportData.satisfaction.physical, reportData.satisfaction.mental],
+                            backgroundColor: ['rgba(15, 118, 110, 0.6)', 'rgba(245, 158, 11, 0.6)'],
+                            borderColor: ['rgba(15, 118, 110, 1)', 'rgba(245, 158, 11, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        indexAxis: 'y',
+                        scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: '% Satisfied'} } },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            };
+
+            const renderCountryChart = (metric) => {
+                if (countryChartInstance) {
+                    countryChartInstance.destroy();
+                }
+                const ctx = document.getElementById('countryChart').getContext('2d');
+                const metricData = reportData.countryComparison[metric];
+                document.getElementById('comparison-text').textContent = metricData.text;
+
+                countryChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: reportData.countryComparison.labels,
+                        datasets: [{
+                            label: metric.replace(/([A-Z])/g, ' $1').trim(),
+                            data: metricData.data,
+                            backgroundColor: [
+                                'rgba(245, 158, 11, 0.6)',
+                                'rgba(15, 118, 110, 0.6)',
+                                'rgba(15, 118, 110, 0.6)',
+                                'rgba(15, 118, 110, 0.6)',
+                            ],
+                            borderColor: [
+                                'rgba(245, 158, 11, 1)',
+                                'rgba(15, 118, 110, 1)',
+                                'rgba(15, 118, 110, 1)',
+                                'rgba(15, 118, 110, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            };
+
+            const setupTabs = () => {
+                const tabs = document.querySelectorAll('.tab');
+                const tabContents = document.querySelectorAll('.tab-content');
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const targetId = tab.dataset.tab;
+                        
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        tabContents.forEach(content => {
+                            content.classList.remove('active');
+                            if (content.id === targetId) {
+                                content.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            };
+            
+            const setupCycleExplanation = () => {
+                const cycleBoxes = document.querySelectorAll('.cycle-box');
+                const explanationBox = document.getElementById('cycle-explanation');
+
+                cycleBoxes.forEach(box => {
+                    box.addEventListener('click', () => {
+                        cycleBoxes.forEach(b => b.classList.remove('border-teal-500', 'shadow-lg'));
+                        box.classList.add('border-teal-500', 'shadow-lg');
+                        explanationBox.innerHTML = `<p class="text-gray-700">${reportData.cycleExplanations[box.id]}</p>`;
+                    });
+                });
+            };
+            
+            const setupNavHighlighting = () => {
+                const sections = document.querySelectorAll('main section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navLinks.forEach(link => {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }, { rootMargin: '-50% 0px -50% 0px' });
+
+                sections.forEach(section => observer.observe(section));
+            };
+
+            renderKappaChart();
+            renderConflictsChart();
+            renderSatisfactionChart();
+            renderCountryChart('suicideRate');
+            setupTabs();
+            setupCycleExplanation();
+            setupNavHighlighting();
+
+            document.getElementById('metric-selector').addEventListener('change', (e) => {
+                renderCountryChart(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>
