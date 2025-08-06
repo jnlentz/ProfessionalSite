@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Jesse Lentz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Basic Setup & Dark Theme (Consistent with homepage) --- */
+        :root {
+            --bg-color: #111827;
+            --card-color: #1F2937;
+            --text-color: #E5E7EB;
+            --heading-color: #FFFFFF;
+            --accent-color: #34D399;
+            --accent-hover-color: #6EE7B7;
+            --border-color: #374151;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        /* --- Layout & Containers --- */
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Wider container for two-column layout */
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--heading-color);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 2.5rem; text-align: center; margin-top: 0;}
+        h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;}
+        h3 { font-size: 1.25rem; }
+        
+        p { margin-bottom: 1rem; }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        a:hover {
+            color: var(--accent-hover-color);
+        }
+
+        /* --- Navigation Bar (Consistent with homepage) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--heading-color);
+        }
+        .nav-brand:hover {
+            color: var(--heading-color);
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            transition: color 0.2s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* --- NEW: Research Page Layout --- */
+        .page-header {
+            padding-top: 8rem; /* To offset the fixed navbar */
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        .research-layout {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .paper-nav {
+            flex: 0 0 250px; /* Sidebar width */
+            position: sticky;
+            top: 120px; /* Position under the main navbar */
+        }
+
+        .paper-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .paper-nav li a {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: var(--text-color);
+            font-weight: 600;
+            border-left: 3px solid transparent;
+            transition: background-color 0.2s ease, border-left 0.2s ease;
+        }
+
+        .paper-nav li a:hover {
+            background-color: var(--card-color);
+        }
+
+        .paper-nav li a.active {
+            color: var(--heading-color);
+            background-color: var(--card-color);
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .paper-content {
+            flex: 1;
+        }
+        
+        /* --- Research Paper Styling --- */
+        .paper {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem 3rem;
+            display: none; /* Hide all papers by default */
+        }
+
+        .paper.active {
+            display: block; /* Show the active paper */
+        }
+        
+        .paper .abstract {
+            font-style: italic;
+            color: var(--text-color);
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .paper strong {
+            color: var(--heading-color);
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .research-layout {
+                flex-direction: column;
+            }
+            .paper-nav {
+                position: static;
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 2rem 1rem; }
+            .paper { padding: 1.5rem; }
+            .nav-menu { display: none; }
+            .page-header { padding-top: 6rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Jesse Lentz</a>
+            <ul class="nav-menu">
+                <li><a href="index.html#portfolio">Work</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <header class="page-header">
+                <h1>Research & Whitepapers</h1>
+                <p style="text-align: center;">A selection of papers detailing the theory and validation of my work.</p>
+            </header>
+
+            <div class="research-layout">
+                <!-- Sidebar Navigation for Papers -->
+                <aside class="paper-nav">
+                    <ul>
+                        <li><a href="#paper-tcxa" class="nav-link active">TCXA Framework</a></li>
+                        <li><a href="#paper-validation" class="nav-link">Validation Framework</a></li>
+                        <!-- Add more links here for future papers -->
+                    </ul>
+                </aside>
+
+                <!-- Content Area for Papers -->
+                <div class="paper-content">
+                    <!-- PAPER 1: TCXA FRAMEWORK -->
+                    <article id="paper-tcxa" class="paper active">
+                        <h2>The TCXA Framework: A Structural Approach to Market Analysis</h2>
+                        <div class="abstract">
+                            <p><strong>Abstract:</strong> Traditional technical analysis often relies on lagging indicators that produce noisy, ambiguous signals. The TCXA Framework proposes a novel method for market analysis that moves beyond simple indicators to model the underlying structure and grammar of price and momentum movements. By identifying a series of key reference points—the current Time, the Apex Candidate, the last Crossover (X), and the last confirmed Apex—the framework generates a rich, stateful vector that describes the market's position within a broader structural context. This approach is designed to be fractal, applying identically across multiple timeframes. By synthesizing these states, we create a comprehensive, holographic view of the market, which has proven to be a highly effective feature set for machine learning models tasked with predicting market direction across multiple forecast horizons.</p>
+                        </div>
+                        <section>
+                            <h3>1. Introduction: Beyond Lagging Indicators</h3>
+                            <p>The fundamental challenge in quantitative trading is discerning signal from noise. Most standard technical indicators, such as moving averages or oscillators, are inherently lagging. They are derivatives of past price action and often generate signals only after a significant portion of a market move has already occurred. Furthermore, they can produce a high volume of false signals in choppy, non-trending markets.</p>
+                            <p>The TCXA Framework was developed to address these shortcomings. Instead of focusing on the value of an indicator itself, it focuses on the structure of the indicator's behavior over time. The core thesis is that markets, like language, have a grammar—a set of structural rules that govern how trends begin, mature, and end. By modeling this grammar, we can create a more robust and forward-looking understanding of the market's state.</p>
+                        </section>
+                        <section>
+                            <h3>2. Core Concepts: The TCXA Reference Points</h3>
+                            <p>The framework is built upon identifying four key reference points relative to any indicator or price series that can be defined by a short-term and long-term component (e.g., a pair of moving averages or oscillators).</p>
+                            <ul>
+                                <li><strong>T (Time):</strong> The current moment, or the candle being analyzed.</li>
+                                <li><strong>C (The Candidate):</strong> The most extreme value reached by the price (or indicator) so far in the current, active phase. It is the "unconfirmed" Apex. C is a dynamic value that is updated every time a new high (in a High Phase) or new low (in a Low Phase) is made.</li>
+                                <li><strong>X (The Crossover):</strong> The point in time where the short-term component crosses the long-term component. This marks the definitive start of a new Phase. A "High Phase" exists when the short is above the long; a "Low Phase" exists when it is below.</li>
+                                <li><strong>A (The Apex):</strong> The most extreme value reached by the price (or indicator) during a completed phase. For a High Phase, it is the highest high. For a Low Phase, it is the lowest low. An Apex is only confirmed in retrospect, once a new Crossover (X) has occurred, officially ending the phase. We track the last two confirmed apexes, A1 (the most recent) and A2 (the one prior).</li>
+                            </ul>
+                            <p>By tracking these four points, we can ask much more sophisticated questions than a simple indicator can answer. Instead of asking, "Is the RSI oversold?", we can ask, "How far has the price pulled back from its most recent high, relative to the length of the entire bull phase that began at the last major bottom?"</p>
+                        </section>
+                        <section>
+                            <h3>3. The State Vector: A Multi-Dimensional View</h3>
+                            <p>The power of the TCXA model comes from combining these reference points into a rich state vector that describes the market at time T. This vector includes derivative metrics such as:</p>
+                            <ul>
+                                <li><strong>dist_from_a1_pct:</strong> The percentage distance from the last confirmed Apex. This is a measure of strategic trend extension.</li>
+                                <li><strong>dist_from_c_pct:</strong> The percentage distance from the current Apex Candidate. This is a measure of tactical pullback or retracement.</li>
+                                <li><strong>time_since_x1:</strong> The duration of the current phase. This is a measure of trend maturity.</li>
+                            </ul>
+                            <p>This state vector can be applied to any time series. In our system, we apply it to two models simultaneously:</p>
+                            <ul>
+                                <li><strong>The Price TCXA Model:</strong> Uses a pair of moving averages on the price to define the primary market trend.</li>
+                                <li><strong>The Momentum TCXA Model:</strong> Uses a pair of oscillators to define the shorter-term momentum regime.</li>
+                            </ul>
+                        </section>
+                        <section>
+                            <h3>4. Multi-Timeframe Synthesis: A Holographic Approach</h3>
+                            <p>The TCXA model is fractal; its logic applies identically to any timeframe. This allows us to build a comprehensive view of the market by observing its structure from multiple perspectives simultaneously. Our research confirmed that the most effective approach is not a hierarchical, rule-based system, but a synthesized one.</p>
+                            <p>By generating the full TCXA state vector for a strategic (high), tactical (medium), and execution (low) timeframe, and then presenting all of these features together as a single, wide input vector, we provide a machine learning model with a holographic view of the market's condition. This allows the model to learn the complex, non-linear relationships between the long-term strategic posture and the short-term tactical movements, leading to a much richer and more predictive understanding than any single timeframe could provide on its own.</p>
+                        </section>
+                        <section>
+                            <h3>5. Application & Conclusion</h3>
+                            <p>The TCXA framework is not a trading strategy in itself. It is a stateful environment engine that produces a high-quality, de-noised representation of the market's structural condition.</p>
+                            <p>Our work has definitively proven that this synthesized, multi-timeframe state vector serves as an exceptionally powerful feature set for supervised machine learning models. We have successfully trained distinct LSTMs on different sets of TCXA timeframes to produce predictive signals with varying characteristics:</p>
+                            <ul>
+                                <li><strong>High-Frequency (3-Minute Forecast):</strong> A model using 3m, 15m, and 1h inputs produces a high-volume signal capable of generating extreme profits, albeit with higher risk, suitable for tactical execution.</li>
+                                <li><strong>Mid-Frequency (1-Hour Forecast):</strong> A model using the same inputs but trained to predict a 1-hour return generates a more stable, trend-following signal that filters intraday noise and demonstrates remarkable robustness across different market conditions.</li>
+                                <li><strong>Low-Frequency (Daily Forecast):</strong> A model using 1h, 4h, and 1d inputs produces a highly accurate, low-frequency signal that excels at identifying major market turning points, making it ideal for strategic positioning and regime filtering.</li>
+                            </ul>
+                            <p>This validation of the framework's fractal nature is the core finding of our research. The model's task was simplified from trying to predict a noisy, chaotic market to learning the optimal response given a clear, stable representation of the market's structural state across multiple scales.</p>
+                            <p>In conclusion, the TCXA framework provides a robust, stateful, and logically consistent method for mapping market structure. By focusing on the grammar of market movements rather than the lagging values of simple indicators, it creates a powerful foundation for the development of sophisticated, AI-driven trading systems that have demonstrated a verifiable and reproducible predictive edge.</p>
+                        </section>
+                    </article>
+
+                    <!-- PAPER 2: VALIDATION FRAMEWORK -->
+                    <article id="paper-validation" class="paper">
+                        <h2>A Framework for Robust Algorithmic Trading System Validation</h2>
+                        <div class="abstract">
+                            <p><strong>Abstract:</strong> The development of a profitable algorithmic trading system is fraught with peril, the most significant of which is the risk of creating a model that performs exceptionally well in historical simulations but fails in a live market environment. This discrepancy often arises from lookahead bias, overfitting, and unrealistic assumptions about trade execution. This paper outlines a comprehensive, closed-loop validation framework designed to mitigate these risks. Our methodology is built on three core principles: a unified feature generation pipeline for both historical and live data, a conservative "pessimistic fill" backtesting model to simulate market friction, and a final "back-checker" process that compares live trading results against an ideal backtest of the same period. This rigorous, multi-stage approach ensures that our backtested performance is a reliable and conservative indicator of real-world potential, providing the confidence needed for live capital deployment.</p>
+                        </div>
+                        <section>
+                            <h3>1. The Challenge: Bridging the Gap Between Backtest and Reality</h3>
+                            <p>The goal of any quantitative trading research is to develop a system that is not only profitable in theory but also in practice. The landscape is littered with strategies that produce beautiful, upward-sloping equity curves in a backtest, only to collapse upon contact with the live market. This failure is almost always a result of a flawed validation process.</p>
+                            <p>Common pitfalls include:</p>
+                            <ul>
+                                <li><strong>Lookahead Bias:</strong> The model is inadvertently given information about the future that it would not have in a live environment.</li>
+                                <li><strong>Overfitting:</strong> The strategy is so finely tuned to the historical data that it has learned the noise, not the signal, and is incapable of adapting to new market conditions.</li>
+                                <li><strong>Unrealistic Execution:</strong> The backtest assumes perfect, frictionless trades at the exact closing price, ignoring the real-world costs of slippage and the bid-ask spread.</li>
+                            </ul>
+                            <p>Our development framework was designed from the ground up to systematically address and eliminate these issues.</p>
+                        </section>
+                        <section>
+                            <h3>2. Principle 1: Unified Feature Generation</h3>
+                            <p>The first and most critical step in our process is to ensure that the data our model sees during a historical backtest is identical to the data it sees during live trading. To achieve this, we use a single, unified feature engineering pipeline for both processes.</p>
+                            <p>Our system's core, the TimeframeAssembler, is a stateful engine that processes raw market klines and generates our proprietary TCXA feature set. When running a historical backtest, we feed this engine a stream of historical candles one by one, exactly as if they were arriving in real-time. The live trading agent uses this exact same class, with the exact same configuration, to process the live websocket feed from the exchange.</p>
+                            <p>This unified approach completely eliminates the risk of lookahead bias and ensures that a prediction generated on a historical candle is a true and accurate representation of what the live agent would have predicted at that same moment in time.</p>
+                        </section>
+                        <section>
+                            <h3>3. Principle 2: The Pessimistic Fill Backtest</h3>
+                            <p>The most common source of inflated backtest returns is the assumption of perfect trade execution. In reality, market orders are subject to slippage, and the price you get is rarely the exact last-traded price.</p>
+                            <p>To create a more robust and conservative performance baseline, our backtesting engine employs a "pessimistic fill" methodology. Instead of assuming a trade is executed at the close of a signal candle, we simulate the worst possible fill within that candle's range:</p>
+                            <ul>
+                                <li><strong>Buy Orders</strong> are simulated as being filled at the high of the candle.</li>
+                                <li><strong>Sell Orders</strong> are simulated as being filled at the low of the candle.</li>
+                            </ul>
+                            <p>This method builds in a buffer that accounts for the inherent friction of the market. It ensures that a strategy is only considered profitable if its signals are strong enough to overcome this simulated "worst-case" execution. As our research has shown, this single change is often the difference between a strategy that appears to be a world-beater and one that is a consistent loser.</p>
+                        </section>
+                        <section>
+                            <h3>4. Principle 3: The Back-Checker Validation Loop</h3>
+                            <p>The final and most important step in our process is to close the loop between the backtest and the live environment. After a new model or strategy has been deployed and has been trading live for a period, we run a dedicated "back-checker" analysis.</p>
+                            <p>This process involves:</p>
+                            <ul>
+                                <li><strong>Loading Live Data:</strong> We query our centralized database for all the predictions and trades that the live agent logged during a specific run.</li>
+                                <li><strong>Running an Ideal Backtest:</strong> We then run our pessimistic fill backtester over the exact same historical time period, using the same market data.</li>
+                                <li><strong>Comparing the Results:</strong> The script produces a detailed, side-by-side report comparing the performance of the live trades to the ideal backtest.</li>
+                            </ul>
+                            <p>This final comparison is the ultimate validation. Our results have consistently shown that the live performance of our agents meets or, more often, exceeds the conservative baseline established by the pessimistic fill backtest. This gives us extremely high confidence that our development process is sound and that the edge we've identified is real, robust, and reproducible.</p>
+                        </section>
+                        <section>
+                            <h3>5. Conclusion</h3>
+                            <p>A profitable trading model is only as valuable as the process used to validate it. By adhering to a strict framework of unified feature generation, conservative execution simulation, and a final back-checking loop, we have built a development pipeline that produces reliable and trustworthy results. This rigorous approach is what allows us to move from research to live deployment with a high degree of confidence in our system's ability to perform as expected.</p>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const papers = document.querySelectorAll('.paper');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    // Get target ID from href
+                    const targetId = this.getAttribute('href').substring(1);
+
+                    // Update active state for nav links
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Update active state for papers
+                    papers.forEach(paper => {
+                        if (paper.id === targetId) {
+                            paper.classList.add('active');
+                        } else {
+                            paper.classList.remove('active');
+                        }
+                    });
+
+                    // Scroll to the top of the content area for better UX
+                    window.scrollTo({ top: document.querySelector('.page-header').offsetTop, behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -3,76 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jesse Lentz</title>
+    <title>Jesse Lentz - AI Systems Architect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* A simple, modern reset */
+        /* --- Basic Setup & Dark Theme --- */
+        :root {
+            --bg-color: #111827; /* A deep navy blue */
+            --card-color: #1F2937; /* A slightly lighter navy */
+            --text-color: #E5E7EB; /* Light grey */
+            --heading-color: #FFFFFF; /* Pure white */
+            --accent-color: #34D399; /* A vibrant green */
+            --accent-hover-color: #6EE7B7;
+            --border-color: #374151;
+        }
+
         *, *::before, *::after {
             box-sizing: border-box;
         }
         
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #121212; /* Dark background */
-            color: #E0E0E0; /* Light grey text */
-            
-            /* Center the content */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
         }
 
+        /* --- Layout & Containers --- */
         .container {
-            max-width: 600px;
-            padding: 2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: #FFFFFF; /* White for the name */
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-top: 0;
-            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
         }
         
-        .subtitle {
-            font-size: 0.9rem;
-            color: #A0A0A0; /* Dimmer text for subtitle */
-            margin-top: 2rem;
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section:last-child {
+            border-bottom: none;
         }
 
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--heading-color);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 0;
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.25rem; text-align: center; margin-bottom: 3rem; }
+        h3 { font-size: 1.25rem; }
+        
+        p { margin-bottom: 1rem; }
+
         a {
-            color: #4CAF50; /* A touch of color for the link */
+            color: var(--accent-color);
             text-decoration: none;
-            font-weight: 500;
             transition: color 0.2s ease-in-out;
         }
 
         a:hover {
-            color: #81C784;
+            color: var(--accent-hover-color);
         }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(17, 24, 39, 0.8); /* Semi-transparent version of bg-color */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--heading-color);
+        }
+        .nav-brand:hover {
+            color: var(--heading-color);
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            transition: color 0.2s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero .tagline {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: 600;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+        }
+        
+        .hero-button:hover {
+            background-color: var(--accent-hover-color);
+            transform: translateY(-2px);
+        }
+
+        /* --- Philosophy Section --- */
+        .philosophy {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        
+        .philosophy h2 {
+            font-size: 1.75rem;
+        }
+        
+        /* --- Portfolio Section --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        
+        .portfolio-card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-card h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .portfolio-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 4px;
+            background-color: var(--bg-color);
+        }
+        
+        .portfolio-content {
+            padding-top: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .portfolio-content p {
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .portfolio-button {
+            display: inline-block;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            font-weight: 600;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+            align-self: flex-start;
+        }
+        
+        .portfolio-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* --- Services Section --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--card-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .service-card p {
+            font-size: 0.9rem;
+        }
+
+        /* --- Contact Section --- */
+        .contact {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .contact-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-weight: 600;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .portfolio-grid, .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .hero .subtitle { font-size: 1.25rem; }
+            .container { padding: 2rem 1rem; }
+            .nav-menu { display: none; } /* Hide menu on small screens for simplicity */
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Jesse Lentz</h1>
-        <p>Architecting and validating high-integrity quantitative trading systems.</p>
-        <p class="subtitle">A full case study and portfolio are currently under construction.</p>
-        
-        <p><a href="mailto:your.email@example.com">Contact</a></p>
-    </div>
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">Jesse Lentz</a>
+            <ul class="nav-menu">
+                <li><a href="#portfolio">Work</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HERO -->
+    <header class="hero">
+        <div class="container">
+            <h1>Jesse Lentz</h1>
+            <p class="subtitle">AI Systems Architect</p>
+            <p class="tagline">
+                I design and build robust, end-to-end systems for complex AI applications—from custom LLM tooling to validated quantitative trading models.
+            </p>
+            <a href="#portfolio" class="hero-button">View My Work</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECTION 2: PHILOSOPHY -->
+        <section id="philosophy" class="section">
+            <div class="container philosophy">
+                <h2>My Approach</h2>
+                <p>
+                    I believe the most complex problems demand a first-principles approach. My work focuses on moving beyond speculation to build verifiable systems that deliver real-world results. I don't just build models; I architect and validate the entire high-integrity environment they need to succeed.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PORTFOLIO -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h2>Featured Work</h2>
+                <div class="portfolio-grid">
+                    <!-- Case Study 1: TCXA -->
+                    <div class="portfolio-card">
+                        <h3>Case Study: The TCXA Trading System</h3>
+                        <!-- Image updated to tcxa_sample.jpg -->
+                        <img src="assets/tcxa_sample.jpg" alt="TCXA Project Diagram">
+                        <div class="portfolio-content">
+                            <p>A five-year R&D effort to build a market-agnostic trading system. This project involved developing a novel market theory, engineering a production-grade data pipeline, and completing a multi-stage validation gauntlet to prove a verifiable, live edge.</p>
+                            <a href="research.html" class="portfolio-button">Read the Full Case Study</a>
+                        </div>
+                    </div>
+                    <!-- Case Study 2: ConvoForge -->
+                    <div class="portfolio-card">
+                        <h3>Case Study: ConvoForge & LLM Tooling</h3>
+                        <!-- Image updated to convo_tab.jpg -->
+                        <img src="assets/convo_tab.jpg" alt="ConvoForge Application Screenshot">
+                        <div class="portfolio-content">
+                            <p>A custom desktop application designed to streamline the process of data collection and curation for fine-tuning large language models. This project showcases expertise in building practical, high-quality tools to solve common AI development bottlenecks.</p>
+                            <a href="https://github.com/jnlentz/ConvoForge" class="portfolio-button" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: SERVICES -->
+        <section id="services" class="section">
+            <div class="container">
+                <h2>How I Can Help</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Strategic Audit & Roadmapping</h3>
+                        <p>A focused engagement to diagnose your existing AI project, identify architectural flaws, and deliver a clear, actionable roadmap for validation and success.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>AI Prototype Package</h3>
+                        <p>A fixed-sprint project to take your concept and transform it into a robust, functional prototype—from the data pipeline to the UI—giving you a tangible asset to test and validate.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>End-to-End System Development</h3>
+                        <p>A full, bespoke engagement to take your most complex challenge from initial theory through architectural design, engineering, and the complete "Validation Gauntlet."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CONTACT -->
+        <footer id="contact" class="section">
+            <div class="container contact">
+                <h2>Let's Solve a Hard Problem.</h2>
+                <p>
+                    I am currently available for new projects. If you're facing a complex architectural challenge and believe my approach is a good fit, I invite you to reach out. We can schedule a no-obligation <strong>Discovery Call</strong> to determine if I can add significant value to your work.
+                </p>
+                <div class="contact-links">
+                    <!-- USER ACTION: Replace placeholders with your actual links -->
+                    <a href="mailto:your.email@example.com">Email</a>
+                    <a href="https://github.com/jnlentz" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="research.html">Whitepapers</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
 </body>
 </html>
