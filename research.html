@@ -45,7 +45,7 @@
         }
         
         /* --- Typography --- */
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             color: var(--heading-color);
             font-weight: 700;
             line-height: 1.3;
@@ -56,6 +56,7 @@
         h1 { font-size: 2.5rem; text-align: center; margin-top: 0;}
         h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;}
         h3 { font-size: 1.25rem; }
+        h4 { font-size: 1.1rem; color: var(--accent-color); }
         
         p { margin-bottom: 1rem; }
 
@@ -119,7 +120,7 @@
             color: var(--accent-color);
         }
         
-        /* --- NEW: Research Page Layout --- */
+        /* --- Research Page Layout --- */
         .page-header {
             padding-top: 8rem; /* To offset the fixed navbar */
             padding-bottom: 2rem;
@@ -189,6 +190,13 @@
             padding-left: 1.5rem;
             margin-bottom: 2rem;
         }
+        
+        .paper .conclusion {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-style: italic;
+        }
 
         .paper strong {
             color: var(--heading-color);
@@ -233,23 +241,61 @@
         <div class="container">
             <header class="page-header">
                 <h1>Research & Whitepapers</h1>
-                <p style="text-align: center;">A selection of papers detailing the theory and validation of my work.</p>
+                <p style="text-align: center;">A selection of papers detailing my methodology and its application.</p>
             </header>
 
             <div class="research-layout">
                 <!-- Sidebar Navigation for Papers -->
                 <aside class="paper-nav">
                     <ul>
-                        <li><a href="#paper-tcxa" class="nav-link active">TCXA Framework</a></li>
+                        <li><a href="#paper-heuristic" class="nav-link active">My Development Philosophy</a></li>
+                        <li><a href="#paper-tcxa" class="nav-link">The TCXA Framework</a></li>
                         <li><a href="#paper-validation" class="nav-link">Validation Framework</a></li>
-                        <!-- Add more links here for future papers -->
                     </ul>
                 </aside>
 
                 <!-- Content Area for Papers -->
                 <div class="paper-content">
+                    <!-- PAPER 3: HEURISTIC -->
+                    <article id="paper-heuristic" class="paper active">
+                        <h2>The Foundational Integrity Heuristic</h2>
+                        <p>This paper articulates the core heuristic I apply to solve novel problems and engineer robust, high-integrity systems.</p>
+                        
+                        <section>
+                            <h4>Step 1: Deconstruct the Prevailing Paradigm.</h4>
+                            <p>Begin not by improving the existing solution, but by challenging its core assumptions. This first step requires a ruthless application of first-principles thinking to find the foundational flaw in the common approach.</p>
+                        </section>
+                        <section>
+                            <h4>Step 2: Formulate a Structural Hypothesis.</h4>
+                            <p>From that clean slate, propose a new model based on a core, structural insight. Instead of relying on lagging values, for example, one might hypothesize that a system has a "grammar." This new hypothesis must be elegant, logical, and—most importantly—testable.</p>
+                        </section>
+                        <section>
+                            <h4>Step 3: Achieve Primary Validation.</h4>
+                            <p>Subject the hypothesis to a rigorous, falsifiable test in a controlled environment. This step answers the simple question: "Does this core idea have merit under ideal 'laboratory' conditions?" It is about proving a raw, theoretical edge exists before committing further resources.</p>
+                        </section>
+                        <section>
+                            <h4>Step 4: Engineer for Reality.</h4>
+                            <p>This is the most critical and difficult step. Acknowledge that the controlled environment is not the real world and systematically rebuild the system to close that gap. This phase is characterized by an obsession with eliminating "illusions"—training-serving skew, look-ahead bias, and environmental discrepancies. The goal is to ensure the system that generates the training data is identical to the system that will operate in the wild.</p>
+                        </section>
+                        <section>
+                            <h4>Step 5: Execute the Validation Gauntlet.</h4>
+                            <p>With a production-grade system in place, subject it to final, targeted stress tests designed to expose any remaining weakness.</p>
+                            <ul>
+                                <li><strong>The Test of Generalization:</strong> Prove the solution isn't a fluke overfitted to one specific context.</li>
+                                <li><strong>The Test of Fidelity:</strong> Prove the system behaves identically in the live world as it does in the final backtest.</li>
+                            </ul>
+                        </section>
+                        <section>
+                            <h4>Step 6: Deploy.</h4>
+                            <p>A validated solution has no value until it is deployed and executing its intended function. The final step is to release the system to perform its work.</p>
+                        </section>
+                        <div class="conclusion">
+                            <p>The core philosophy of this entire heuristic is a profound intellectual humility. It assumes that you are likely wrong, that your tools are flawed, and that reality is more subtle than your model. It then systematically applies rigorous scrutiny and testing to close the gap between your idea and the truth, until the highest possible degree of confidence is achieved.</p>
+                        </div>
+                    </article>
+
                     <!-- PAPER 1: TCXA FRAMEWORK -->
-                    <article id="paper-tcxa" class="paper active">
+                    <article id="paper-tcxa" class="paper">
                         <h2>The TCXA Framework: A Structural Approach to Market Analysis</h2>
                         <div class="abstract">
                             <p><strong>Abstract:</strong> Traditional technical analysis often relies on lagging indicators that produce noisy, ambiguous signals. The TCXA Framework proposes a novel method for market analysis that moves beyond simple indicators to model the underlying structure and grammar of price and momentum movements. By identifying a series of key reference points—the current Time, the Apex Candidate, the last Crossover (X), and the last confirmed Apex—the framework generates a rich, stateful vector that describes the market's position within a broader structural context. This approach is designed to be fractal, applying identically across multiple timeframes. By synthesizing these states, we create a comprehensive, holographic view of the market, which has proven to be a highly effective feature set for machine learning models tasked with predicting market direction across multiple forecast horizons.</p>
@@ -345,7 +391,7 @@
                                 <li><strong>Running an Ideal Backtest:</strong> We then run our pessimistic fill backtester over the exact same historical time period, using the same market data.</li>
                                 <li><strong>Comparing the Results:</strong> The script produces a detailed, side-by-side report comparing the performance of the live trades to the ideal backtest.</li>
                             </ul>
-                            <p>This final comparison is the ultimate validation. Our results have consistently shown that the live performance of our agents meets or, more often, exceeds the conservative baseline established by the pessimistic fill backtest. This gives us extremely high confidence that our development process is sound and that the edge we've identified is real, robust, and reproducible.</p>
+                            <p>This final comparison is the ultimate validation. Our results have consistentlyshown that the live performance of our agents meets or, more often, exceeds the conservative baseline established by the pessimistic fill backtest. This gives us extremely high confidence that our development process is sound and that the edge we've identified is real, robust, and reproducible.</p>
                         </section>
                         <section>
                             <h3>5. Conclusion</h3>
@@ -362,30 +408,47 @@
             const navLinks = document.querySelectorAll('.nav-link');
             const papers = document.querySelectorAll('.paper');
 
+            function showPaper(targetId) {
+                // Update active state for nav links
+                navLinks.forEach(navLink => {
+                    if (navLink.getAttribute('href') === '#' + targetId) {
+                        navLink.classList.add('active');
+                    } else {
+                        navLink.classList.remove('active');
+                    }
+                });
+
+                // Update active state for papers
+                papers.forEach(paper => {
+                    if (paper.id === targetId) {
+                        paper.classList.add('active');
+                    } else {
+                        paper.classList.remove('active');
+                    }
+                });
+            }
+
             navLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
-
-                    // Get target ID from href
                     const targetId = this.getAttribute('href').substring(1);
-
-                    // Update active state for nav links
-                    navLinks.forEach(navLink => navLink.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Update active state for papers
-                    papers.forEach(paper => {
-                        if (paper.id === targetId) {
-                            paper.classList.add('active');
-                        } else {
-                            paper.classList.remove('active');
-                        }
-                    });
-
-                    // Scroll to the top of the content area for better UX
-                    window.scrollTo({ top: document.querySelector('.page-header').offsetTop, behavior: 'smooth' });
+                    showPaper(targetId);
+                    // Update URL hash without jumping
+                    history.pushState(null, null, '#' + targetId);
                 });
             });
+
+            // Check for a hash in the URL on page load
+            if (window.location.hash) {
+                const initialTargetId = window.location.hash.substring(1);
+                const initialPaper = document.getElementById(initialTargetId);
+                if (initialPaper) {
+                    showPaper(initialTargetId);
+                }
+            } else {
+                // If no hash, show the first paper by default
+                showPaper('paper-heuristic');
+            }
         });
     </script>
 
