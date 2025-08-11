@@ -201,6 +201,31 @@
         .paper strong {
             color: var(--heading-color);
         }
+
+        .download-button {
+            display: inline-block;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            font-weight: 600;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .download-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .heuristic-punchline {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--heading-color);
+            margin-top: 2rem;
+        }
         
         /* --- Responsive Design --- */
         @media (max-width: 900px) {
@@ -259,6 +284,7 @@
                     <!-- PAPER 3: HEURISTIC -->
                     <article id="paper-heuristic" class="paper active">
                         <h2>The Foundational Integrity Heuristic</h2>
+                        <a href="#" class="download-button">Download as PDF</a>
                         <p>This paper articulates the core heuristic I apply to solve novel problems and engineer robust, high-integrity systems.</p>
                         
                         <section>
@@ -291,12 +317,14 @@
                         </section>
                         <div class="conclusion">
                             <p>The core philosophy of this entire heuristic is a profound intellectual humility. It assumes that you are likely wrong, that your tools are flawed, and that reality is more subtle than your model. It then systematically applies rigorous scrutiny and testing to close the gap between your idea and the truth, until the highest possible degree of confidence is achieved.</p>
+                            <p class="heuristic-punchline">It can't be perfect, so what do we do instead?</p>
                         </div>
                     </article>
 
                     <!-- PAPER 1: TCXA FRAMEWORK -->
                     <article id="paper-tcxa" class="paper">
                         <h2>The TCXA Framework: A Structural Approach to Market Analysis</h2>
+                        <a href="#" class="download-button">Download as PDF</a>
                         <div class="abstract">
                             <p><strong>Abstract:</strong> Traditional technical analysis often relies on lagging indicators that produce noisy, ambiguous signals. The TCXA Framework proposes a novel method for market analysis that moves beyond simple indicators to model the underlying structure and grammar of price and momentum movements. By identifying a series of key reference points—the current Time, the Apex Candidate, the last Crossover (X), and the last confirmed Apex—the framework generates a rich, stateful vector that describes the market's position within a broader structural context. This approach is designed to be fractal, applying identically across multiple timeframes. By synthesizing these states, we create a comprehensive, holographic view of the market, which has proven to be a highly effective feature set for machine learning models tasked with predicting market direction across multiple forecast horizons.</p>
                         </div>
@@ -352,6 +380,7 @@
                     <!-- PAPER 2: VALIDATION FRAMEWORK -->
                     <article id="paper-validation" class="paper">
                         <h2>A Framework for Robust Algorithmic Trading System Validation</h2>
+                        <a href="#" class="download-button">Download as PDF</a>
                         <div class="abstract">
                             <p><strong>Abstract:</strong> The development of a profitable algorithmic trading system is fraught with peril, the most significant of which is the risk of creating a model that performs exceptionally well in historical simulations but fails in a live market environment. This discrepancy often arises from lookahead bias, overfitting, and unrealistic assumptions about trade execution. This paper outlines a comprehensive, closed-loop validation framework designed to mitigate these risks. Our methodology is built on three core principles: a unified feature generation pipeline for both historical and live data, a conservative "pessimistic fill" backtesting model to simulate market friction, and a final "back-checker" process that compares live trading results against an ideal backtest of the same period. This rigorous, multi-stage approach ensures that our backtested performance is a reliable and conservative indicator of real-world potential, providing the confidence needed for live capital deployment.</p>
                         </div>
@@ -368,8 +397,8 @@
                         </section>
                         <section>
                             <h3>2. Principle 1: Unified Feature Generation</h3>
-                            <p>The first and most critical step in our process is to ensure that the data our model sees during a historical backtest is identical to the data it sees during live trading. To achieve this, we use a single, unified feature engineering pipeline for both processes.</p>
-                            <p>Our system's core, the TimeframeAssembler, is a stateful engine that processes raw market klines and generates our proprietary TCXA feature set. When running a historical backtest, we feed this engine a stream of historical candles one by one, exactly as if they were arriving in real-time. The live trading agent uses this exact same class, with the exact same configuration, to process the live websocket feed from the exchange.</p>
+                            <p>The first and most critical step in our process is to ensure that the data our model sees during a historical backtest is identical to the data it sees during live trading. To achieve this, we use a single, unified feature engineering pipeline for all processes.</p>
+                            <p>Our system's core, the TimeframeAssembler, is a stateful engine that processes raw market klines and generates our proprietary TCXA feature set. This engine is used to create the feature sets for <strong>all stages</strong> of the process: initial model training, historical backtesting, and live prediction. When generating historical data for training or backtesting, we feed this engine a stream of candles one by one, exactly as if they were arriving in real-time. The live trading agent then uses this exact same class, with the exact same configuration, to process the live websocket feed from the exchange.</p>
                             <p>This unified approach completely eliminates the risk of lookahead bias and ensures that a prediction generated on a historical candle is a true and accurate representation of what the live agent would have predicted at that same moment in time.</p>
                         </section>
                         <section>
