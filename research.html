@@ -274,7 +274,6 @@
                 <aside class="paper-nav">
                     <ul>
                         <li><a href="#paper-heuristic" class="nav-link active">My Development Philosophy</a></li>
-                        <li><a href="#paper-tcxa" class="nav-link">The TCXA Framework</a></li>
                         <li><a href="#paper-validation" class="nav-link">Validation Framework</a></li>
                     </ul>
                 </aside>
@@ -319,60 +318,7 @@
                         </div>
                     </article>
 
-                    <!-- PAPER 1: TCXA FRAMEWORK -->
-                    <article id="paper-tcxa" class="paper">
-                        <h2>The TCXA Framework: A Structural Approach to Market Analysis</h2>
-                        <div class="abstract">
-                            <p><strong>Abstract:</strong> Traditional technical analysis often relies on lagging indicators that produce noisy, ambiguous signals. The TCXA Framework proposes a novel method for market analysis that moves beyond simple indicators to model the underlying structure and grammar of price and momentum movements. By identifying a series of key reference points—the current Time, the Apex Candidate, the last Crossover (X), and the last confirmed Apex—the framework generates a rich, stateful vector that describes the market's position within a broader structural context. This approach is designed to be fractal, applying identically across multiple timeframes. By synthesizing these states, we create a comprehensive, holographic view of the market, which has proven to be a highly effective feature set for machine learning models tasked with predicting market direction across multiple forecast horizons.</p>
-                        </div>
-                        <section>
-                            <h3>1. Introduction: Beyond Lagging Indicators</h3>
-                            <p>The fundamental challenge in quantitative trading is discerning signal from noise. Most standard technical indicators, such as moving averages or oscillators, are inherently lagging. They are derivatives of past price action and often generate signals only after a significant portion of a market move has already occurred. Furthermore, they can produce a high volume of false signals in choppy, non-trending markets.</p>
-                            <p>The TCXA Framework was developed to address these shortcomings. Instead of focusing on the value of an indicator itself, it focuses on the structure of the indicator's behavior over time. The core thesis is that markets, like language, have a grammar—a set of structural rules that govern how trends begin, mature, and end. By modeling this grammar, we can create a more robust and forward-looking understanding of the market's state.</p>
-                        </section>
-                        <section>
-                            <h3>2. Core Concepts: The TCXA Reference Points</h3>
-                            <p>The framework is built upon identifying four key reference points relative to any indicator or price series that can be defined by a short-term and long-term component (e.g., a pair of moving averages or oscillators).</p>
-                            <ul>
-                                <li><strong>T (Time):</strong> The current moment, or the candle being analyzed.</li>
-                                <li><strong>C (The Candidate):</strong> The most extreme value reached by the price (or indicator) so far in the current, active phase. It is the "unconfirmed" Apex. C is a dynamic value that is updated every time a new high (in a High Phase) or new low (in a Low Phase) is made.</li>
-                                <li><strong>X (The Crossover):</strong> The point in time where the short-term component crosses the long-term component. This marks the definitive start of a new Phase. A "High Phase" exists when the short is above the long; a "Low Phase" exists when it is below.</li>
-                                <li><strong>A (The Apex):</strong> The most extreme value reached by the price (or indicator) during a completed phase. For a High Phase, it is the highest high. For a Low Phase, it is the lowest low. An Apex is only confirmed in retrospect, once a new Crossover (X) has occurred, officially ending the phase. We track the last two confirmed apexes, A1 (the most recent) and A2 (the one prior).</li>
-                            </ul>
-                            <p>By tracking these four points, we can ask much more sophisticated questions than a simple indicator can answer. Instead of asking, "Is the RSI oversold?", we can ask, "How far has the price pulled back from its most recent high, relative to the length of the entire bull phase that began at the last major bottom?"</p>
-                        </section>
-                        <section>
-                            <h3>3. The State Vector: A Multi-Dimensional View</h3>
-                            <p>The power of the TCXA model comes from combining these reference points into a rich state vector that describes the market at time T. This vector includes derivative metrics such as:</p>
-                            <ul>
-                                <li><strong>dist_from_a1_pct:</strong> The percentage distance from the last confirmed Apex. This is a measure of strategic trend extension.</li>
-                                <li><strong>dist_from_c_pct:</strong> The percentage distance from the current Apex Candidate. This is a measure of tactical pullback or retracement.</li>
-                                <li><strong>time_since_x1:</strong> The duration of the current phase. This is a measure of trend maturity.</li>
-                            </ul>
-                            <p>This state vector can be applied to any time series. In our system, we apply it to two models simultaneously:</p>
-                            <ul>
-                                <li><strong>The Price TCXA Model:</strong> Uses a pair of moving averages on the price to define the primary market trend.</li>
-                                <li><strong>The Momentum TCXA Model:</strong> Uses a pair of oscillators to define the shorter-term momentum regime.</li>
-                            </ul>
-                        </section>
-                        <section>
-                            <h3>4. Multi-Timeframe Synthesis: A Holographic Approach</h3>
-                            <p>The TCXA model is fractal; its logic applies identically to any timeframe. This allows us to build a comprehensive view of the market by observing its structure from multiple perspectives simultaneously. Our research confirmed that the most effective approach is not a hierarchical, rule-based system, but a synthesized one.</p>
-                            <p>By generating the full TCXA state vector for a strategic (high), tactical (medium), and execution (low) timeframe, and then presenting all of these features together as a single, wide input vector, we provide a machine learning model with a holographic view of the market's condition. This allows the model to learn the complex, non-linear relationships between the long-term strategic posture and the short-term tactical movements, leading to a much richer and more predictive understanding than any single timeframe could provide on its own.</p>
-                        </section>
-                        <section>
-                            <h3>5. Application & Conclusion</h3>
-                            <p>The TCXA framework is not a trading strategy in itself. It is a stateful environment engine that produces a high-quality, de-noised representation of the market's structural condition.</p>
-                            <p>Our work has definitively proven that this synthesized, multi-timeframe state vector serves as an exceptionally powerful feature set for supervised machine learning models. We have successfully trained distinct LSTMs on different sets of TCXA timeframes to produce predictive signals with varying characteristics:</p>
-                            <ul>
-                                <li><strong>High-Frequency (3-Minute Forecast):</strong> A model using 3m, 15m, and 1h inputs produces a high-volume signal capable of generating extreme profits, albeit with higher risk, suitable for tactical execution.</li>
-                                <li><strong>Mid-Frequency (1-Hour Forecast):</strong> A model using the same inputs but trained to predict a 1-hour return generates a more stable, trend-following signal that filters intraday noise and demonstrates remarkable robustness across different market conditions.</li>
-                                <li><strong>Low-Frequency (Daily Forecast):</strong> A model using 1h, 4h, and 1d inputs produces a highly accurate, low-frequency signal that excels at identifying major market turning points, making it ideal for strategic positioning and regime filtering.</li>
-                            </ul>
-                            <p>This validation of the framework's fractal nature is the core finding of our research. The model's task was simplified from trying to predict a noisy, chaotic market to learning the optimal response given a clear, stable representation of the market's structural state across multiple scales.</p>
-                            <p>In conclusion, the TCXA framework provides a robust, stateful, and logically consistent method for mapping market structure. By focusing on the grammar of market movements rather than the lagging values of simple indicators, it creates a powerful foundation for the development of sophisticated, AI-driven trading systems that have demonstrated a verifiable and reproducible predictive edge.</p>
-                        </section>
-                    </article>
+                    
 
                     <!-- PAPER 2: VALIDATION FRAMEWORK -->
                     <article id="paper-validation" class="paper">
