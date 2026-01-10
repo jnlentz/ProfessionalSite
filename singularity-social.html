@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study: Singularity Social - Jesse Lentz</title>
+    <title>Post-Mortem: Singularity Social Experiment - Jesse Lentz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Basic Setup & Dark Theme (Consistent with other pages) --- */
+        /* --- Basic Setup & Dark Theme --- */
         :root {
             --bg-color: #111827;
             --card-color: #1F2937;
@@ -17,15 +17,12 @@
             --accent-color: #34D399;
             --accent-hover-color: #6EE7B7;
             --border-color: #374151;
+            --highlight-bg: rgba(52, 211, 153, 0.1);
+            --code-bg: #111827;
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -36,7 +33,7 @@
             line-height: 1.7;
         }
 
-        /* --- Layout & Containers --- */
+        /* --- Layout --- */
         .container {
             width: 100%;
             max-width: 900px;
@@ -58,27 +55,15 @@
         h3 { font-size: 1.25rem; color: var(--accent-color); }
         
         p { margin-bottom: 1rem; }
+        a { color: var(--accent-color); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--accent-hover-color); }
+        strong { color: var(--heading-color); }
+        em { color: #9CA3AF; }
 
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color 0.2s ease-in-out;
-        }
-
-        a:hover {
-            color: var(--accent-hover-color);
-        }
-
-        strong {
-            color: var(--heading-color);
-        }
-
-        /* --- Navigation Bar (Consistent with other pages) --- */
+        /* --- Components --- */
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             background-color: rgba(17, 24, 39, 0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -87,58 +72,35 @@
         }
 
         .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            max-width: 1100px; margin: 0 auto; padding: 1rem 2rem;
         }
 
-        .nav-brand {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--heading-color);
-        }
-        .nav-brand:hover {
-            color: var(--heading-color);
-        }
+        .nav-brand { font-weight: 700; font-size: 1.25rem; color: var(--heading-color); }
+        .nav-menu { list-style: none; display: flex; gap: 2rem; padding: 0; margin: 0; }
+        .nav-menu a { font-weight: 600; font-size: 0.9rem; color: var(--text-color); }
+        .nav-menu a:hover { color: var(--accent-color); }
 
-        .nav-menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-color);
-            transition: color 0.2s ease;
-        }
-
-        .nav-menu a:hover {
-            color: var(--accent-color);
-        }
-        
-        /* --- Page-Specific Styles --- */
+        /* --- Page Specific --- */
         .page-header {
-            padding-top: 8rem;
-            padding-bottom: 2rem;
+            padding-top: 8rem; padding-bottom: 2rem;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 3rem;
-            text-align: center;
+            margin-bottom: 3rem; text-align: center;
+        }
+        .page-header p { font-size: 1.1rem; color: var(--text-color); max-width: 700px; margin: 1rem auto 0; }
+        
+        .status-badge {
+            display: inline-block;
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #F87171;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
-        .page-header p {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            max-width: 700px;
-            margin: 1rem auto 0;
-        }
-        
         .section-content {
             background-color: var(--card-color);
             padding: 2rem;
@@ -147,37 +109,83 @@
             margin-bottom: 2rem;
         }
 
-        .performance-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
+        /* --- Metrics Grid --- */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
         }
-        .performance-table th, .performance-table td {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .performance-table th {
-            color: var(--heading-color);
-        }
-        
-        .disclaimer {
-            font-size: 0.85rem;
-            color: #9CA3AF; /* Lighter grey for disclaimer */
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
+        .metric-card {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
             text-align: center;
         }
+        .metric-label { font-size: 0.85rem; color: #9CA3AF; display: block; margin-bottom: 0.5rem; }
+        .metric-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); }
+        .metric-value.bad { color: #F87171; }
 
-        /* --- Responsive Design --- */
+        /* --- Timeline Styles --- */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border-color);
+        }
+        .timeline-item {
+            position: relative; margin-bottom: 4rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute; left: -2.4rem; top: 0.5rem; width: 1rem; height: 1rem;
+            border-radius: 50%; background: var(--accent-color); border: 3px solid var(--bg-color);
+        }
+        .timeline-date {
+            font-size: 0.85rem; color: var(--accent-color); font-weight: 600;
+            margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        
+        .tweet-display {
+            margin-top: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000;
+        }
+        .tweet-display img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .tweet-link {
+            display: block;
+            padding: 0.75rem;
+            background-color: var(--card-color);
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .tweet-link:hover {
+            background-color: var(--border-color);
+            text-decoration: underline;
+        }
+
+        /* --- Responsive --- */
         @media (max-width: 600px) {
             .container { padding: 2rem 1rem; }
             .nav-menu { display: none; }
             .page-header { padding-top: 6rem; }
             h1 { font-size: 2rem; }
+            .timeline { padding-left: 1.5rem; }
+            .timeline-item::before { left: -1.9rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
         }
-
     </style>
 </head>
 <body>
@@ -197,106 +205,109 @@
     <main>
         <div class="container">
             <header class="page-header">
-                <h1>Project Singularity</h1>
-                <p>An autonomous AI system for transparent, data-driven market analysis.</p>
+                <span class="status-badge">Experiment Concluded</span>
+                <h1>Project Singularity: Social</h1>
+                <p>An autonomous agent, a critical bug, and a Black Swan prediction.</p>
             </header>
 
             <section>
-                <h2>What is Singularity?</h2>
+                <h2>The Premise: Speed vs. Validation</h2>
                 <div class="section-content">
-                    <p>Singularity v1.9 is an autonomous AI system designed to analyze the cryptocurrency market and share its findings on social media. Its mission is to provide transparent, data-driven insights into the market's direction. It operates 24/7, running a continuous cycle of data analysis, prediction, and strategy. When its internal model identifies a high-probability opportunity, it shares that "trade signal" publicly, complete with charts and an AI-generated narrative explaining its reasoning.</p>
-                </div>
-            </section>
-            
-            <section>
-                <h2>How Does It Work? A Three-Step Process</h2>
-                <div class="section-content">
-                    <p>At its core, Singularity follows a simple but powerful process every hour of every day.</p>
-                    <h3>Step 1: Reading the Market's Structure</h3>
-                    <p>The system doesn't just look at the price. It begins by processing the raw flow of market trades, resampling them into standard candlesticks (klines) across multiple timeframes (from 3-minutes to daily). It then analyzes these klines to understand deeper structural patterns. This proprietary analysis, called <strong>TCXA</strong>, is like reading the "grammar" of the market, allowing the AI to understand the context of price movements rather than just reacting to them.</p>
-                    <h3>Step 2: Predicting the Future</h3>
-                    <p>Once it understands the current market structure, Singularity uses a deep learning model (an <strong>LSTM</strong>, a type of AI well-suited for time-series data) to make a single, specific forecast: it predicts the percentage return of Bitcoin over the next 24 hours. This prediction is the AI's core piece of analysis.</p>
-                    <h3>Step 3: Generating a "Signal"</h3>
-                    <p>A good prediction isn't enough to act on. The bot uses a dynamic, intelligent filter to decide when a prediction is significant enough to be considered a "signal." Instead of using fixed buy/sell points, it constantly analyzes its own recent predictions to understand its own baseline. A signal is only triggered when a new prediction is a major statistical outlier—a result so strong that it represents a high-conviction change in the market's expected direction.</p>
+                    <p>This project was an experiment in <strong>accelerated engineering</strong>. I designed the proprietary feature sets based on years of market analysis, but the entire deployment pipeline—from data ingestion to social media posting—was <strong>prompt-engineered</strong> using LLMs.</p>
+                    <p>This was not "vibe-coding" where I blindly trusted the output. I know how to write the code myself. Instead, I treated the LLM as a force multiplier to build a complex system in days rather than weeks. This approach drastically increases speed, but it also raises the stakes for validation. When you generate code at machine speed, you need to validate it with equal rigor.</p>
+                    <p>The goal was to test a promising model live: connecting its internal logic to the Gemini API to "speak" its findings to the public in real-time.</p>
                 </div>
             </section>
 
             <section>
-                <h2>How to Read the Posts and Charts</h2>
+                <h2>The Timeline: Predicting the Crash</h2>
                 <div class="section-content">
-                    <p><strong>Understanding the Predictions:</strong> It's important to know how the AI thinks. Every hour, the system generates a new prediction for the market's return over the next 24 hours. The trade signals it posts are suggestions based on these predictions. Currently, Singularity is only "paper trading"—it is logging these signals and tracking its performance in a simulated environment, not with real capital. This allows for a transparent and honest evaluation of its capabilities.</p>
-                    <h3>Chart 1: The Market Activity Chart (The Top Chart)</h3>
-                    <p>This chart tells the story of the bot's actions.</p>
-                    <ul>
-                        <li><strong>Green Line:</strong> The price during periods when the bot is IN a position.</li>
-                        <li><strong>Red Line:</strong> The price during periods when the bot is OUT of a position, patiently waiting.</li>
-                        <li><strong>Green Triangle (▲):</strong> Marks the exact point where the bot entered a new position.</li>
-                        <li><strong>Magenta Triangle (▼):</strong> Marks the exact point where the bot exited its last position.</li>
-                    </ul>
-                    <h3>Chart 2: The Performance Chart (The Bottom Chart)</h3>
-                    <p>This is the most important chart for judging the AI's performance.</p>
-                    <ul>
-                        <li><strong>Orange Line:</strong> This is the AI's prediction.</li>
-                        <li><strong>Cyan Line:</strong> This is the actual, real-world return that occurred in the 24 hours following the prediction. By comparing the orange line to the cyan line, you can see for yourself how accurate the model has been recently.</li>
-                        <li><strong>Dotted Lines:</strong> These are the dynamic entry and exit thresholds. A signal is only fired when the orange line crosses one of these smart filters.</li>
-                    </ul>
+                    <p>The experiment ran for approximately three weeks in October 2025. Despite the backend issues discussed later, the model's behavior during this period was fascinating. It successfully navigated standard volatility and then, remarkably, predicted the massive "10/10 Crash" with high precision.</p>
+                    
+                    <div class="timeline">
+                        
+                        <!-- Event 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">October 3, 2025</div>
+                            <h3>The Buy Signal</h3>
+                            <p>Early in the deployment, the system correctly identified a local dip. The proprietary features (visualized in the top chart) aligned to trigger a high-confidence entry.</p>
+                            <div class="tweet-display">
+                                <img src="images/SingularitySocial1.png" alt="Singularity Buy Signal Tweet Screenshot">
+                                <a href="https://x.com/ZtenlEssej/status/1973583799469367684?s=20" target="_blank" class="tweet-link">View Live on X &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Event 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">October 9, 2025</div>
+                            <h3>The Exit (Sell Signal)</h3>
+                            <p>The day before the crash. While broader retail sentiment was neutral, Singularity's internal structure metrics degraded. The bot flipped bearish and exited all positions, effectively "going to cash" before the chaos.</p>
+                            <div class="tweet-display">
+                                <img src="images/SingularitySocial2.png" alt="Singularity Sell Signal Tweet Screenshot">
+                                <a href="https://x.com/ZtenlEssej/status/1976437663486878081?s=20" target="_blank" class="tweet-link">View Live on X &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Event 3 -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">October 10, 2025</div>
+                            <h3>The Crash Prediction</h3>
+                            <p><strong>The Black Swan Event.</strong> Moments before the market bottomed out, the system posted this prediction. It accurately forecast the sharp downward spike followed by the structural recovery.</p>
+                            <div class="tweet-display">
+                                <img src="images/SingularitySocial3.png" alt="Singularity Crash Prediction Tweet Screenshot">
+                                <a href="https://x.com/ZtenlEssej/status/1976649065203929089?s=20" target="_blank" class="tweet-link">View Live on X &rarr;</a>
+                            </div>
+                        </div>
+
+                         <!-- Event 4 -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">Post-Crash</div>
+                            <h3>The Recovery</h3>
+                            <p>Following the crash, the system continued to track the recovery, validating that its "mental model" of the market had remained intact through the volatility.</p>
+                            <div class="tweet-display">
+                                <img src="images/SingularitySocial4.png" alt="Singularity Recovery Tweet Screenshot">
+                                <a href="https://x.com/ZtenlEssej/status/1978098607040434485?s=20" target="_blank" class="tweet-link">View Live on X &rarr;</a>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
             
             <section>
-                <h2>Performance: A Multi-Cycle Stress Test</h2>
+                <h2>Forensics: The "<=" Bug</h2>
                 <div class="section-content">
-                    <p>No trading system is perfect. The goal is not to be right 100% of the time, but to maintain a high win rate and a strong profit factor over a large number of trades and across different market conditions.</p>
-                    <p>To perform the ultimate stress test of the underlying TCXA framework, a model was trained <strong>exclusively on DOGE/USDT data</strong> from 2020-2025. This model, which had never seen a single candle of Bitcoin data, was then run on a continuous backtest of <strong>BTC/USD data spanning over a decade, from 2014 to 2025.</strong></p>
-                    <p>This cross-asset, multi-cycle backtest proves that the system has not 'memorized' the patterns of a single market but has learned the fundamental, transferable grammar of market structure—or, more simply, it has learned to predict sentiment. The results demonstrate the statistical edge the model has shown in this rigorous, non-compounding test (capital capped at $1,000):</p>
-                    <table class="performance-table">
-                        <thead>
-                            <tr>
-                                <th>Metric</th>
-                                <th>Result</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Total Return</td>
-                                <td>+2,057.87%</td>
-                            </tr>
-                            <tr>
-                                <td>Total Trades</td>
-                                <td>503</td>
-                            </tr>
-                            <tr>
-                                <td>Win Rate</td>
-                                <td>64.61%</td>
-                            </tr>
-                            <tr>
-                                <td>Profit Factor</td>
-                                <td>5.89</td>
-                            </tr>
-                            <tr>
-                                <td>Max Drawdown</td>
-                                <td>-19.95%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p style="font-size: 0.9rem; margin-top: 1.5rem;"><em>These are historical results from a robust, cross-asset validation test and are not a guarantee of future performance.</em></p>
-                </div>
-            </section>
-            
-            <section>
-                <h2>The Voice of Singularity: AI-Powered Narrative</h2>
-                <div class="section-content">
-                    <p>The text of each post is generated by a separate AI. The charts and key data are fed into Google's Gemini 2.5 Pro model, which acts as the "voice" of Singularity. It interprets the visual data and crafts the narrative to explain the bot's actions.</p>
-                    <p>In the future, the plan is to develop a proprietary, fine-tuned language model to replace this component, bringing the entire system in-house.</p>
+                    <p>In backtesting, this model showed a correlation of <strong>0.2+</strong> (predicting returns 24 hours out), a number so good it was suspicious. To protect against this, I built a custom validator that regenerated historical features and compared them against the live bot's output.</p>
+                    <p>The validator showed a <strong>0.9999+ correlation</strong> between the backtest logic and the live run. I thought this meant the system was sound. I was wrong.</p>
+                    
+                    <h3>The Silent Failure</h3>
+                    <p>The bug was a single character in the preprocessing pipeline: using <code>&lt;=</code> (less than or equal to) instead of <code>&lt;</code> (less than) when time-stamping data. This allowed the feature generator to peek exactly one data point into the future.</p>
+                    <p>Because the validator ran the <em>same code</em> as the live bot, it reproduced the bug perfectly. The code was consistent, but the features were fundamentally flawed compared to the training data reality. The model was receiving "polluted" features in production, leading to a massive performance drop-off.</p>
+
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">Backtest Correlation (Bugged)</span>
+                            <span class="metric-value">~0.20</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Live Run Correlation (Actual)</span>
+                            <span class="metric-value bad">~0.014</span>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 1.5rem;">The irony is that despite this massive degradation in statistical edge, the robust underlying logic (the "physics" of the market structure) was strong enough to still catch the 10/10 crash. It serves as a powerful lesson: <strong>Unit tests check if code works; validation checks if the premise is true.</strong></p>
                 </div>
             </section>
 
-            <div class="disclaimer">
-                <p><strong>Disclaimer:</strong> The content posted by the Singularity v1.9 bot is for informational and educational purposes only. It is the output of an autonomous AI system and does not constitute financial advice. All trading and investment decisions carry risk. Past performance is not indicative of future results.</p>
-            </div>
+            <section>
+                <h2>Retrospective</h2>
+                <div class="section-content">
+                    <p>I took the project offline to re-architect the pipeline. This experiment was one of my most sophisticated live tests to date. It proved that I can rapidly deploy complex AI agents using LLMs, but it also reinforced the need for independent, adversarial validation frameworks that don't just mimic the production code.</p>
+                    <p>Every failure teaches a little more about how to construct robust systems—and how to verify them.</p>
+                </div>
+            </section>
+
         </div>
     </main>
-
 </body>
 </html>
-
