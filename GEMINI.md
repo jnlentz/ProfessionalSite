@@ -19,6 +19,7 @@ Workflow:
 4. Add modern polish: Responsiveness, navigation, project cards, Mandelbrot-themed visuals.
 5. Test locally and ensure deployability.
 6. Iterate autonomously (in YOLO mode) until complete, professional, and aligned with the plan.
+7. MAKE NO CHANGES TO GIT - it's very important that nothing is committed before I review it
 
 Be conservative: Improve without breaking; focus on organization, generalist narrative with engineering depth, and Mandelbrot branding.
 
